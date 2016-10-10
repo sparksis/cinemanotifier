@@ -1,14 +1,17 @@
-<p>This is a quick dirty subscribe and notify service which allows
-	you to receive notifications when tickets are available to be purchased
-	from cineplex.ca favorite shows</p>
-<p>
-	Find out more about the show
-	<a href="https://github.com/sparksis/cineplex-notifier/blob/master/README.md">here</a>
-</p>
-
-<h3>Get notified for</h3>
-<ul>
-	<li ng-repeat="m in movies">
-		<a ng-href="#!/movies/{{m}}">{{m}}</a>
-	</li>
-</ul>
+<div>
+	<div>
+		<p>This is a quick &amp; dirty subscribe and notify service which allows
+			you to receive notifications when tickets are available to be
+			purchased from cineplex.ca for their favorite shows</p>
+		<p>
+			Find out more about the site
+			<a href="https://github.com/sparksis/cineplex-notifier/blob/master/README.md">here</a>
+		</p>
+	</div>
+	<h3>Select a movie below to get stared:</h3>
+	<ul>
+		<li ng-repeat="m in movies">
+			<a ng-href="#!/movies/{{m}}">{{m}}</a>
+		</li>
+	</ul>
+</div>
