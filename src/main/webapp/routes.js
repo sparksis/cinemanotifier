@@ -4,12 +4,12 @@ angular.module("moviesApp").config(
 					$locationProvider.hashPrefix('!');
 
 					$routeProvider.when('/movies/:movie', {
-						templateUrl : 'movies.html',
+						templateUrl : 'resources/pages/movies.html',
 						controllerAs : '$ctrl',
 						controller : function($routeParams) {
 							this.movie = $routeParams.movie
 						}
 					}).when('/', {
-						templateUrl : 'default.html'
+						templateUrl : 'resources/pages/default.html'
 					});
 				} ]);
