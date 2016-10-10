@@ -1,4 +1,4 @@
-package com.sparksis.cineplexnotifier.rest;
+package com.cineplexnotifier.rest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

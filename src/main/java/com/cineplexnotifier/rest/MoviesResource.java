@@ -1,4 +1,4 @@
-package com.sparksis.cineplexnotifier.rest;
+package com.cineplexnotifier.rest;
 
 import java.util.Arrays;
 import java.util.List;
