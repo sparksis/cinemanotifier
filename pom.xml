@@ -55,6 +55,9 @@
 		<!-- maven-compiler-plugin -->
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<maven.compiler.source>1.7</maven.compiler.source>
+		
+		<!-- JavaScript merge and minify -->
+		<wro4j.version>1.8.0</wro4j.version>
 	</properties>
 
 	<licenses>
@@ -191,6 +194,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>ro.isdc.wro4j</groupId>
+			<artifactId>wro4j-core</artifactId>
+			<version>${wro4j.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -221,6 +229,19 @@
 					<!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
 					<source>1.8</source>
 					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>ro.isdc.wro4j</groupId>
+				<artifactId>wro4j-maven-plugin</artifactId>
+				<version>${wro4j.version}</version>
+				<configuration>
+					<targetGroups>all</targetGroups>
+					<minimize>true</minimize>
+					<destinationFolder>${basedir}/src/main/webapp/wro/</destinationFolder>
+					<contextFolder>${basedir}/src/main/webapp/</contextFolder>
+					<wroFile>${basedir}/src/main/webapp/WEB-INF/wro.xml</wroFile>
+					<ignoreMissingResources>false</ignoreMissingResources>
 				</configuration>
 			</plugin>
 		</plugins>
