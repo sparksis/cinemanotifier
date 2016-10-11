@@ -4,11 +4,7 @@ angular.module("moviesApp").config(
 					$locationProvider.hashPrefix('!');
 
 					$routeProvider.when('/movies/:movie', {
-						templateUrl : 'resources/pages/movies.html',
-						controllerAs : '$ctrl',
-						controller : function($routeParams) {
-							this.movie = $routeParams.movie
-						}
+						template : '<email-signup></email-signup>'
 					}).when('/', {
 						templateUrl : 'resources/pages/default.html'
 					});

@@ -1,4 +1,4 @@
-angular.module('moviesApp', [ 'ngResource', 'ngRoute' ]);
+angular.module('moviesApp', [ 'ngResource', 'ngRoute' , 'emailSignup' ]);
 
 angular.module('moviesApp').controller('MoviesController',
 		function($scope, Movies) {
