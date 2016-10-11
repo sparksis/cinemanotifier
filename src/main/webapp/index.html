@@ -30,17 +30,7 @@
    
   <ng-view></ng-view>
 
-	<script type="text/javascript">
-		angular.module('moviesApp',['ngResource','ngRoute']);
-
-		angular.module('moviesApp').factory('Movies',function($resource){
-			return $resource('/rest/movies');
-		});
-
-		angular.module('moviesApp').controller('MoviesController',function($scope, Movies){
-			$scope.movies = Movies.query();
-		});
-	</script>
+	<script type="text/javascript" src="resources/js/app.js"></script>
 
 	<script type="text/javascript" src="resources/js/routes.js"></script>
 
