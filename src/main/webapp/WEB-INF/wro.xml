@@ -1,0 +1,32 @@
+<groups xmlns="http://www.isdc.ro/wro">
+	<group name='all'>
+		<group-ref>angularjs</group-ref>
+		<group-ref>app</group-ref>
+		<group-ref>services</group-ref>
+	</group>
+
+	<group name="angularjs">
+		<js>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js</js>
+		<js>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js</js>
+		<js>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-resource.js</js>
+		<js>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js</js>
+		<js>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.js</js>
+		<js>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.js</js>
+	</group>
+	
+	<group name="app">
+		<group-ref>email-signup</group-ref>
+		<js>/resources/js/app.js</js>
+		<js>/resources/js/routes.js</js>
+	</group>
+
+	<group name="email-signup">
+		<js>/resources/js/email-signup/email-signup.module.js</js>
+		<js>/resources/js/email-signup/email-signup.component.js</js>
+	</group>
+
+	<group name="services">
+		<js>/resources/js/services/movies-resource.js</js>
+		<js>/resources/js/services/emails-resources.js</js>
+	</group>
+</groups>
