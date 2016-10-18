@@ -8,6 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jboss.resteasy.annotations.cache.Cache;
+
 import com.cineplexnotifier.data.MovieRepository;
 import com.cineplexnotifier.model.Movie;
 
@@ -19,6 +21,7 @@ public class MoviesResource {
 
 	@GET
 	@Path("/")
+	@Cache(maxAge = 600)
 	public List<Movie> getAllMovies() {
 		return movieDao.getAll();
 	}

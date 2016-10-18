@@ -9,19 +9,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerResponseContext;
-import javax.ws.rs.container.ContainerResponseFilter;
-import javax.ws.rs.ext.Provider;
 
-@Provider
 @WebFilter(urlPatterns="/*")
-public class CacheFilter implements Filter,ContainerResponseFilter {
-
-	@Override
-	public void filter(ContainerRequestContext request, ContainerResponseContext response) throws IOException {
-		response.getHeaders().add("Cache-Control", "max-age=600");
-	}
+public class CacheFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
