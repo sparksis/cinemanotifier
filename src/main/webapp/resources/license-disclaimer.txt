@@ -1,0 +1,8 @@
+/**
+ * 
+ * This file is a compilation of many third-party JavaScript libraries. The
+ * licenses herein apply to some of the works contained in this file but not
+ * this file as a whole. If you require further clarification please submit a
+ * request to this site's support team.
+ * 
+ */
