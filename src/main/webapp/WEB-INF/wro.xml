@@ -10,7 +10,11 @@
 
 	<group name="angularjs">
 		<js>/resources/license-disclaimer.txt</js>
+		<css>/resources/license-disclaimer.txt</css>
+		
+		<css>https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css</css>
 		<js>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js</js>
+		
 		<js>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js</js>
 		<js>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-resource.min.js</js>
 		<js>https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js</js>
