@@ -11,7 +11,7 @@ public class Resources {
 	private EntityManager em;
 
 	@Produces @Default
-	public EntityManager geEntityManager() {
+	public EntityManager getEntityManager() {
 		return em;
 	}
 
