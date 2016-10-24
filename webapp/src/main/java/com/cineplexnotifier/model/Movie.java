@@ -6,14 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 @Entity
 @XmlRootElement
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String name, cineplexKey, descriptionHtml;
+	private String name, cineplexKey, descriptionHtml, thumbnailImageUrl;
 	private byte[] thumbnailImage, posterImage;
 
 	public String getCineplexKey() {
@@ -35,8 +38,13 @@ public class Movie {
 	public byte[] getPosterImage() {
 		return posterImage;
 	}
+
 	public byte[] getThumbnailImage() {
 		return thumbnailImage;
+	}
+
+	public String getThumbnailImageUrl() {
+		return thumbnailImageUrl;
 	}
 
 	public void setCineplexKey(String cineplexKey) {
@@ -57,6 +65,10 @@ public class Movie {
 
 	public void setThumbnailImage(byte[] thumbnailImage) {
 		this.thumbnailImage = thumbnailImage;
+	}
+
+	public void setThumbnailImageUrl(String thumbnailImageUrl) {
+		this.thumbnailImageUrl = thumbnailImageUrl;
 	}
 
 }

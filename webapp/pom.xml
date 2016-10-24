@@ -41,6 +41,7 @@
 		<version.jboss.bom>8.2.1.Final</version.jboss.bom>
 
 		<version.wildfly>8.2.0.Final</version.wildfly>
+		<version.resteasy>3.0.19.Final</version.resteasy>
 
 		<!-- Other dependency versions -->
 		<version.org.eclipse.m2e>1.0.0</version.org.eclipse.m2e>
@@ -125,9 +126,15 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
-			<version>3.0.10.Final</version>
+			<version>${version.resteasy}</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<version>${version.resteasy}</version>
+		</dependency>
+
 
 		<!-- Import the JPA API, we use provided scope as the API is included in 
 			JBoss -->

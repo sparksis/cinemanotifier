@@ -31,10 +31,13 @@ def lookupMovies(pageUrl){
     }
 
     def listing = [:]
+
     def titleNode = it.querySelector('.showtime-card--title > a');
     def uri = titleNode.getAttributes().getNamedItem("href").getValue();
     listing.cineplexKey = uri.substring(uri.lastIndexOf("/")+1,uri.length());
     listing.name = titleNode.getTextContent();
+
+    listing.thumbnailImageUrl = it.querySelector('img.dbsmallposter').getAttributes().getNamedItem("src").getValue();
 
     r.push(listing);
   }
@@ -43,27 +46,26 @@ def lookupMovies(pageUrl){
 }
 
 def loadListing(id){
-  println('TODO: return the HTMLPage for the specified id');
+  //TODO
   return null;
 }
 
 def findDescription(listing){
-  println('TODO: find movie description');
+  //TODO
   return null;
 }
 
 def findThumbnail(listing){
-  println('TODO: find movie thumbnailImage');
+  //TODO
   return null;
 }
 
 def findPosterImage(listing){
-  println('TODO: find movie posterImage');
+  //TODO
   return null;
 }
 
 def publish(movie){
-  println('TODO: publish movie to cineplexnotifier')
   def http = new HTTPBuilder('http://localhost:8080')
   http.request( POST ) {
     uri.path = '/rest/movies/'
