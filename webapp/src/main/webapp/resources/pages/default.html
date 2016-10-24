@@ -3,15 +3,33 @@
 		<p>This is a quick &amp; dirty subscribe and notify service which allows
 			you to receive notifications when tickets are available to be
 			purchased from cineplex.ca for their favorite shows</p>
-		<p>
-			Find out more about the site
-			<a href="https://github.com/sparksis/cineplex-notifier/blob/master/README.md">here</a>
-		</p>
+			<p>
+				Find out more about the site
+				<a href="https://github.com/sparksis/cineplex-notifier/blob/master/README.md">here</a>
+			</p>
+		</div>
+		<h3>Select a movie below to get started:</h3>
+		<md-content >
+			<div class='md-padding' layout="row" layout-wrap>
+				<md-card style="width: 350px;" ng-repeat="m in movies">
+					<md-card-header>
+						<md-card-header-text>
+							<md-title>
+								{{m.name}}
+							</md-title>
+						</md-card-header-text>
+					</md-card-header>
+					<md-card-title-media>
+						<img class="thumbnail" ng-src="{{m.thumbnailImageUrl}}" />
+					</md-card-title-media>
+					<md-card-content>
+						<p>{{m.description}}</p>
+					</md-card-content>
+					<md-card-actions>
+						<md-button>Setup Notification</md-button>
+						<md-button>View @ Cineplex.com</md-button>
+					</md-card-actions>
+				</md-card>
+			</div>
+		</md-content>
 	</div>
-	<h3>Select a movie below to get started:</h3>
-	<ul>
-		<li ng-repeat="m in movies">
-			<a ng-href="#!/movies/{{m.cineplexKey}}">{{m.name}}</a>
-		</li>
-	</ul>
-</div>
