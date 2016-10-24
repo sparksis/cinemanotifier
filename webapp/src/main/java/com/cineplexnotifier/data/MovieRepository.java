@@ -15,6 +15,12 @@ public class MovieRepository {
 	@PersistenceContext
 	private EntityManager em;
 
+	public Movie getMovieByCineplexKey(String key) {
+		//TODO create typesafe query
+		return (Movie) em.createQuery("select m from Movie m where m.cineplexKey = :cineplexKey")
+				.setParameter("cineplexKey", key).getSingleResult();
+	}
+
 	public List<Movie> getAll() {
 		CriteriaQuery<Movie> cq = em.getCriteriaBuilder().createQuery(Movie.class);
 		cq.select(cq.from(Movie.class));
