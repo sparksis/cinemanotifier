@@ -26,8 +26,8 @@
 						<p>{{m.description}}</p>
 					</md-card-content>
 					<md-card-actions>
-						<md-button>Setup Notification</md-button>
-						<md-button>View @ Cineplex.com</md-button>
+						<md-button target="_blank" ng-href="#!/movies/{{m.cineplexKey}}">Setup Email</md-button>
+						<md-button ng-href="https://cineplex.com/Movie/{{m.cineplexKey}}">View @ Cineplex.com</md-button>
 					</md-card-actions>
 				</md-card>
 			</div>
