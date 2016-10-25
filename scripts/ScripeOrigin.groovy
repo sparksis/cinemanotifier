@@ -21,7 +21,6 @@ def init(){
 
 
 def lookupMovies(pageUrl){
-  println('TODO: lookup movies');
   def listingsPage = webClient.getPage(pageUrl);
   def listings = listingsPage.querySelectorAll('.showtime-card');
   def r = [];
@@ -83,11 +82,7 @@ init();
 def results = lookupMovies("http://www.cineplex.com/Movies/ComingSoon?cmpid=MainSubNavEN_coming-soon");
 
 results.each{
-  //TODO remove debugging code
-  println "${it.name} (${it.cineplexKey})";
-}
-
-results.each{
+    println "Processing ${it.name} (${it.cineplexKey})";
     def listing = loadListing();
     it.descriptionHtml = findDescription(listing);
     it.thumbnailImage = findThumbnail(listing);
