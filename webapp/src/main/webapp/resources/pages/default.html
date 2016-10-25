@@ -11,7 +11,7 @@
 		<h3>Select a movie below to get started:</h3>
 		<md-content >
 			<div class='md-padding' layout="row" layout-wrap>
-				<md-card style="width: 350px;" ng-repeat="m in movies">
+				<md-card style="width: 350px; max-height: 500px" ng-repeat="m in $ctrl.movies">
 					<md-card-header>
 						<md-card-header-text>
 							<md-title>
@@ -19,11 +19,10 @@
 							</md-title>
 						</md-card-header-text>
 					</md-card-header>
-					<md-card-title-media>
-						<img class="thumbnail" ng-src="{{m.thumbnailImageUrl}}" />
-					</md-card-title-media>
 					<md-card-content>
-						<p>{{m.description}}</p>
+						<img style="float:left;" class="thumbnail" ng-src="{{m.thumbnailImageUrl}}" />
+						<p>
+						{{m.description}}</p>
 					</md-card-content>
 					<md-card-actions>
 						<md-button ng-href="#!/movies/{{m.cineplexKey}}">Setup Email</md-button>

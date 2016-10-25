@@ -45,12 +45,11 @@ def lookupMovies(pageUrl){
 }
 
 def loadListing(id){
-  return webClient.getPage("https://cineplex.com/Movie/${pageUrl}");
+  return webClient.getPage("https://cineplex.com/Movie/${id}");
 }
 
 def findDescription(listing){
-  //TODO
-  return null;
+  return listing.getByXPath('//div[@class="single--body"]/h4[text()="Synopsis"]/following-sibling::p/text()').get(0).toString();
 }
 
 def findThumbnail(listing){
@@ -82,8 +81,8 @@ def results = lookupMovies("http://www.cineplex.com/Movies/ComingSoon?cmpid=Main
 
 results.each{
   println "Processing ${it.name} (${it.cineplexKey})";
-  def listing = loadListing();
-  it.descriptionHtml = findDescription(listing);
+  def listing = loadListing(it.cineplexKey);
+  it.description = findDescription(listing);
   it.thumbnailImage = findThumbnail(listing);
   it.posterImage = findPosterImage(listing);
 

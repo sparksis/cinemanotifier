@@ -1,5 +1,6 @@
 package com.cineplexnotifier.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,15 +17,16 @@ public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String name, cineplexKey, descriptionHtml, thumbnailImageUrl;
+	private String name, cineplexKey, thumbnailImageUrl;
+	@Column(length=4*1024) private String description;
 	private byte[] thumbnailImage, posterImage;
 
 	public String getCineplexKey() {
 		return cineplexKey;
 	}
 
-	public String getDescriptionHtml() {
-		return descriptionHtml;
+	public String getDescription() {
+		return description;
 	}
 
 	public long getId() {
@@ -51,8 +53,8 @@ public class Movie {
 		this.cineplexKey = cineplexKey;
 	}
 
-	public void setDescriptionHtml(String descriptionHtml) {
-		this.descriptionHtml = descriptionHtml;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public void setName(String name) {

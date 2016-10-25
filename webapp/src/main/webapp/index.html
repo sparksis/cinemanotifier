@@ -14,13 +14,27 @@
   		margin-right: 1em;
   	}
   	
+  	md-card-content {
+  		overflow: hidden;
+  		text-overflow: ellipsis;
+  	}
+
+  	md-card-content > img {
+  		float:left;
+  		margin: 0em 1em 0em 0em;
+  	}
+
+	md-card-content > p {
+		min-height: 1000px;
+	}  	
+  	
   	.thumbnail{
   		width: 130px;
   	}
   </style>
 
 </head>
-<body ng-app="moviesApp" ng-controller="MoviesController" ng-cloak>
+<body ng-app="moviesApp" ng-controller="MoviesController as $ctrl" ng-cloak>
   <div style="margin-bottom: 2em;">
    <h1 class="md-display-2" style="margin-bottom: -.4em">Cineplex Notifier</h1>
    <p class="md-caption">Cineplex Notifier is not in anyway affiliated with Cineplex Entertainment LP or their partners or subsidiaries.
