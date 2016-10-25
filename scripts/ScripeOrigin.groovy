@@ -45,8 +45,7 @@ def lookupMovies(pageUrl){
 }
 
 def loadListing(id){
-  //TODO
-  return null;
+  return webClient.getPage("https://cineplex.com/Movie/${pageUrl}");
 }
 
 def findDescription(listing){
@@ -82,11 +81,11 @@ init();
 def results = lookupMovies("http://www.cineplex.com/Movies/ComingSoon?cmpid=MainSubNavEN_coming-soon");
 
 results.each{
-    println "Processing ${it.name} (${it.cineplexKey})";
-    def listing = loadListing();
-    it.descriptionHtml = findDescription(listing);
-    it.thumbnailImage = findThumbnail(listing);
-    it.posterImage = findPosterImage(listing);
+  println "Processing ${it.name} (${it.cineplexKey})";
+  def listing = loadListing();
+  it.descriptionHtml = findDescription(listing);
+  it.thumbnailImage = findThumbnail(listing);
+  it.posterImage = findPosterImage(listing);
 
-    publish(it);
+  publish(it);
 }
