@@ -6,6 +6,8 @@
 	
 	<group name="thirdparty">
 		<group-ref>angularjs</group-ref>
+		
+		<js>https://jira.sparksis.com/s/3186406625fce430d620489d08ae3c50-T/en_UKb4yqzt/71010/b6b48b2829824b869586ac216d119363/2.0.14/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-UK&amp;collectorId=2f3e23e7</js>
 	</group>
 
 	<group name="angularjs">
