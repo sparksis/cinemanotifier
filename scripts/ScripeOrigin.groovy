@@ -52,11 +52,6 @@ def findDescription(listing){
   return listing.getByXPath('//div[@class="single--body"]/h4[text()="Synopsis"]/following-sibling::p/text()').get(0).toString();
 }
 
-def findThumbnail(listing){
-  //TODO
-  return null;
-}
-
 def findPosterImage(listing){
   //TODO
   return null;
@@ -83,7 +78,6 @@ results.each{
   println "Processing ${it.name} (${it.cineplexKey})";
   def listing = loadListing(it.cineplexKey);
   it.description = findDescription(listing);
-  it.thumbnailImage = findThumbnail(listing);
   it.posterImage = findPosterImage(listing);
 
   publish(it);
