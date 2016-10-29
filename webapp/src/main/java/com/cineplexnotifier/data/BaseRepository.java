@@ -44,4 +44,8 @@ public abstract class BaseRepository<T extends BaseModel> {
 		getEntityManager().merge(model);
 	}
 	
+	public void delete(T model){
+		getEntityManager().remove(model);
+	}
+	
 }
