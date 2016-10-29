@@ -47,7 +47,7 @@ public class MoviesResource {
 	@GET
 	@Path("{id}")
 	public Movie getMovieByCineplexKey(@PathParam("id") String cineplexKey) {
-		return movieDao.getMovieByCineplexKey(cineplexKey);
+		return movieDao.selectByCineplexKey(cineplexKey);
 	}
 
 }

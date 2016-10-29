@@ -2,6 +2,7 @@ package com.cineplexnotifier.data;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,22 +16,26 @@ public class MovieRepository extends BaseRepository<Movie> {
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	public MovieRepository() {
 		super(Movie.class);
 	}
-	
+
 	@Override
-	public EntityManager getEntityManager() {
+	protected EntityManager getEntityManager() {
 		return em;
 	}
 
-	public Movie getMovieByCineplexKey(String key) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
-		Root<Movie> root = cq.from(Movie.class);
-		cq.select(root).where(cb.equal(root.get(Movie_.cineplexKey),key)).distinct(true);
-		return em.createQuery(cq).getSingleResult();
+	public Movie selectByCineplexKey(String key) {
+		try {
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
+			Root<Movie> root = cq.from(Movie.class);
+			cq.select(root).where(cb.equal(root.get(Movie_.cineplexKey), key)).distinct(true);
+			return em.createQuery(cq).getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
 	}
 
 }

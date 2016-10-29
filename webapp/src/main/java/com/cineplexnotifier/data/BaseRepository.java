@@ -33,7 +33,7 @@ public abstract class BaseRepository<T extends BaseModel> {
 		return getEntityManager().createQuery(cq).getResultList();
 	}
 	
-	public abstract EntityManager getEntityManager();
+	protected abstract EntityManager getEntityManager();
 	
 	public long insert(T model){
 		getEntityManager().persist(model);
