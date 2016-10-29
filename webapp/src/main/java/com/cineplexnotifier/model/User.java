@@ -3,6 +3,7 @@ package com.cineplexnotifier.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -10,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User extends BaseModel {
 	
 	private String email;
-	private List<Movie> movies;
+	@OneToMany private List<Movie> movies;
 	
 	public String getEmail() {
 		return email;
@@ -20,9 +21,6 @@ public class User extends BaseModel {
 	}
 	public List<Movie> getMovies() {
 		return movies;
-	}
-	public void setMovies(List<Movie> movies) {
-		this.movies = movies;
 	}
 
 }

@@ -31,14 +31,14 @@ public class MoviesResource {
 	@Path("/")
 	@Cache(maxAge = 600)
 	public List<Movie> getAllMovies() {
-		return movieDao.getAll();
+		return movieDao.selectAll();
 	}
 
 	@POST
 	@Path("/")
 	public Response putMovie(Movie m) throws URISyntaxException {
 		URI r = new URI(m.getCineplexKey());
-		if (m.getId() == 0l && movieDao.addMovie(m) != 0l) {
+		if (m.getId() == 0l && movieDao.insert(m) != 0l) {
 			return Response.created(r).build();
 		}
 		throw new WebApplicationException(Status.BAD_REQUEST);
