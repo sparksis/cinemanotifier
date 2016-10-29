@@ -2,23 +2,14 @@ package com.cineplexnotifier.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @Entity
 @XmlRootElement
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Movie {
+public class Movie extends BaseModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
 	private String name, cineplexKey, thumbnailImageUrl;
-	@Column(length=4*1024) private String description;
+	@Column(length = 4 * 1024) private String description;
 	private byte[] thumbnailImage, posterImage;
 
 	public String getCineplexKey() {
@@ -27,10 +18,6 @@ public class Movie {
 
 	public String getDescription() {
 		return description;
-	}
-
-	public long getId() {
-		return id;
 	}
 
 	public String getName() {
