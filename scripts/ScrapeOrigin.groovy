@@ -77,11 +77,11 @@ def publish(movie){
 
 init();
 for (int i = 1;i <= 20;i++) {
-  println "Reading Page: ${i}"
+  println "Reading Page:         ${i}"
   def results = lookupMovies("http://www.cineplex.com/Movies/ComingSoon?cmpid=MainSubNavEN_coming-soon&page=${i}");
 
   results.each{
-    println "Processing ${it.name} (${it.cineplexKey})";
+    println "Processing:           ${it.name} (${it.cineplexKey})";
     def listing = loadListing(it.cineplexKey);
     it.description = findDescription(listing);
     it.posterImage = findPosterImage(listing);
