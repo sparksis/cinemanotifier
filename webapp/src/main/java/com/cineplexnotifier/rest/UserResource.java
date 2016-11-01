@@ -26,7 +26,7 @@ public class UserResource {
 
 	@POST
 	@Path("{email}/subscribe")
-	public void subscribe(@PathParam("email") String email, List<String> cineplexKeys) {
+	public void subscribe(@PathParam("email") String email, String... cineplexKeys) {
 		User user = dao.selectByEmailAddress(email);
 
 		// get database attached user
