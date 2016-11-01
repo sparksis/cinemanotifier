@@ -39,6 +39,7 @@
 
 	<group name="services">
 		<js>/resources/js/services/movies-resource.js</js>
-		<js>/resources/js/services/emails-resources.js</js>
+		<js>/resources/js/services/users-resources.js</js>
+		<js>/resources/js/toasts-presets.js</js>
 	</group>
 </groups>

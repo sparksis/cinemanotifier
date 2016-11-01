@@ -1,5 +1,6 @@
 package com.cineplexnotifier.data;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -9,6 +10,7 @@ import javax.persistence.criteria.Root;
 import com.cineplexnotifier.model.User;
 import com.cineplexnotifier.model.User_;
 
+@Stateless
 public class UserRepository extends BaseRepository<User> {
 
 	@PersistenceContext
@@ -28,7 +30,11 @@ public class UserRepository extends BaseRepository<User> {
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> root = cq.from(User.class);
 		cq.select(root).where(cb.equal(root.get(User_.email), emailAddress));
-		return em.createQuery(cq).getSingleResult();
+		try{
+			return em.createQuery(cq).getSingleResult();
+		}catch(javax.persistence.NoResultException e){
+			return null;
+		}
 
 	}
 	

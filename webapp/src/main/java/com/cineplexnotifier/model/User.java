@@ -1,5 +1,6 @@
 package com.cineplexnotifier.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,17 +17,23 @@ public class User extends BaseModel {
 	@OneToMany private List<Movie> movies;
 	
 	public User(){}
-	public User(String emailAddress){
+
+	public User(String emailAddress) {
 		this.email = emailAddress;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public List<Movie> getMovies() {
+		if (movies == null) {
+			movies = new LinkedList<>();
+		}
 		return movies;
 	}
 

@@ -2,6 +2,9 @@ package com.cineplexnotifier.rest;
 
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -17,6 +20,7 @@ import com.cineplexnotifier.model.User;
 @Path("user")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Stateless
 public class UserResource {
 
 	@EJB
@@ -24,6 +28,9 @@ public class UserResource {
 	@EJB
 	private MovieRepository movieRepository;
 
+	@EJB
+	private UserResource ejb;
+	
 	@POST
 	@Path("{email}/subscribe")
 	public void subscribe(@PathParam("email") String email, String... cineplexKeys) {
@@ -33,9 +40,7 @@ public class UserResource {
 		user = dao.selectByEmailAddress(email);
 		// if user doesn't exist sign them up automatically
 		if (user == null) {
-			user = new User(email);
-			dao.insert(user);
-			// TODO send welcome email or create UserManagement EJB
+			user = signupUser(email);
 		}
 
 		List<Movie> movies = user.getMovies();
@@ -43,6 +48,13 @@ public class UserResource {
 			movies.add(movieRepository.selectByCineplexKey(key));
 		}
 
-		dao.update(user);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public User signupUser(String email){
+		User user = new User(email);
+		dao.insert(user);
+		// TODO send welcome email or create UserManagement EJB
+		return user;
 	}
 }
