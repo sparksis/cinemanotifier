@@ -220,6 +220,13 @@
 			<artifactId>derby</artifactId>
 			<version>10.12.1.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-servlet</artifactId>
+			<version>3.4.1.Final</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
