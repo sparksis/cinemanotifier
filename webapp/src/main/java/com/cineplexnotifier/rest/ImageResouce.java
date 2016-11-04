@@ -24,6 +24,7 @@ import com.cineplexnotifier.data.MovieRepository;
 public class ImageResouce {
 
 	public static final String MISSING_THUMBNAIL_URL = "http://mediafiles.cineplex.com/Cineplex2013/postermissing_230x341.jpg";
+	public static final String REPLACEMENT_MISSING_THUMBNAIL_URL = "../resources/images/imagenotavailable.png";
 
 	@EJB
 	private MovieRepository dao;
@@ -37,7 +38,7 @@ public class ImageResouce {
 		// Do not deliver the not found images from our server as they contain
 		// the Cineplex logo
 		if (MISSING_THUMBNAIL_URL.equals(remoteUrl)) {
-			throw new RedirectionException(Status.MOVED_PERMANENTLY, new URI(remoteUrl));
+			throw new RedirectionException(Status.MOVED_PERMANENTLY, new URI(REPLACEMENT_MISSING_THUMBNAIL_URL));
 		}
 
 		URL remote = new URL(remoteUrl);
