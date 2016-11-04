@@ -10,9 +10,16 @@ angular.module('emailSignup').component('emailSignup', {
 		});
 
 		$self.subscribe = function() {
-			Users.save({email:$self.email, action:'subscribe'},[$self.movie.cineplexKey],function(){$mdToast.show(
-					$mdToast.subscribeSuccess()
-			)});
+			Users.save(
+				{email:$self.email, action:'subscribe'},
+				[$self.movie.cineplexKey],
+				function(){
+					$mdToast.show($mdToast.subscribeSuccess());
+				},
+				function(){
+					$mdToast.show($mdToast.subscribeFailure());
+				}
+			);
 		};
 	}
 });
