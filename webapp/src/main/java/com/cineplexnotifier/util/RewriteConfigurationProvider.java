@@ -22,7 +22,7 @@ public class RewriteConfigurationProvider extends HttpConfigurationProvider {
 		return ConfigurationBuilder.begin()
 				.addRule()
 					.when(Direction.isInbound()
-						.and(Path.matches("/movie/{page}")))
+						.and(Path.matches("/movies/{page}")))
 					.perform(Forward.to("/index.html"))
 				;
 	}
