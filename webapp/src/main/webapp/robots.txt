@@ -1,2 +1,1 @@
-#Disable crawling until we're tested and released
 User-agent: *
