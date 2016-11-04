@@ -32,7 +32,7 @@ public class MoviesResource {
 	@GET
 	@Path("/")
 	@Cache(maxAge = 600)
-	public List<Movie> getMovies(@DefaultValue(value="false") @QueryParam("all") boolean available ) {
+	public List<Movie> getMovies(@DefaultValue(value = "false") @QueryParam("all") boolean available) {
 		return movieDao.selectByAvailability(false);
 	}
 
@@ -40,7 +40,14 @@ public class MoviesResource {
 	@Path("/")
 	public Response putMovie(Movie m) throws URISyntaxException {
 		URI r = new URI(m.getCineplexKey());
-		if (m.getId() == 0l && movieDao.insert(m) != 0l) {
+		Movie old = movieDao.selectByCineplexKey(m.getCineplexKey());
+		if (old != null) {
+			m.setId(old.getId());
+			movieDao.update(m);
+
+			// TODO formalize REST conventions used by this app
+			return Response.created(r).build();
+		} else if (m.getId() == 0l && movieDao.insert(m) != 0l) {
 			return Response.created(r).build();
 		}
 		throw new WebApplicationException(Status.BAD_REQUEST);
