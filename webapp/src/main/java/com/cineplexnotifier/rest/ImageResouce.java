@@ -29,7 +29,7 @@ public class ImageResouce {
 	private MovieRepository dao;
 
 	@GET
-	@Path("thumbnail/{cineplexKey}")
+	@Path("thumbnail/{cineplexKey}.jpg")
 	@Cache
 	public byte[] getThumbnail(@PathParam("cineplexKey") String key) throws IOException, URISyntaxException {
 		String remoteUrl = dao.selectByCineplexKey(key).getThumbnailImageUrl();

@@ -1,7 +1,7 @@
 <md-content style="max-width: 700px;" layout-padding>
 <form name="emailSignup" ng-submit="$ctrl.subscribe()">
 
-	<img ng-src="/rest/images/thumbnail/{{m.cineplexKey}}" >
+    <img style="float:left;" class="thumbnail" ng-src="/rest/images/thumbnail/{{$ctrl.movie.cineplexKey}}.jpg" />
 	<h5 class="md-title">{{$ctrl.movie.name}}</h5>
 	<p class="md-body-1">
 		To be notified when you can grab your tickets for
