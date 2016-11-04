@@ -8,8 +8,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Movie extends BaseModel {
 
-	private String name, cineplexKey, thumbnailImageUrl;
+	private boolean available;
 	@Column(length = 4 * 1024) private String description;
+	private String name, cineplexKey, thumbnailImageUrl;
 	private byte[] thumbnailImage, posterImage;
 
 	public String getCineplexKey() {
@@ -34,6 +35,14 @@ public class Movie extends BaseModel {
 
 	public String getThumbnailImageUrl() {
 		return thumbnailImageUrl;
+	}
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
 	public void setCineplexKey(String cineplexKey) {

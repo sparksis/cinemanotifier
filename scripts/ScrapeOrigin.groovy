@@ -25,11 +25,9 @@ def lookupMovies(pageUrl){
   def listings = listingsPage.querySelectorAll('.showtime-card');
   def r = [];
   listings.each{
-    if(it.getTextContent().contains("Buy Tickets")){
-      return;
-    }
-
     def listing = [:]
+
+    listing.available = it.getTextContent().contains("Buy Tickets");
 
     def titleNode = it.querySelector('.showtime-card--title > a');
     def uri = titleNode.getAttributes().getNamedItem("href").getValue();

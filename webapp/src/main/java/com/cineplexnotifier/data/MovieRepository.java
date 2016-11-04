@@ -1,5 +1,7 @@
 package com.cineplexnotifier.data;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -24,6 +26,14 @@ public class MovieRepository extends BaseRepository<Movie> {
 	@Override
 	protected EntityManager getEntityManager() {
 		return em;
+	}
+
+	public List<Movie> selectByAvailability(boolean available) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
+		Root<Movie> root = cq.from(Movie.class);
+		cq.select(root).where(cb.equal(root.get(Movie_.available), available));
+		return em.createQuery(cq).getResultList();
 	}
 
 	public Movie selectByCineplexKey(String key) {
