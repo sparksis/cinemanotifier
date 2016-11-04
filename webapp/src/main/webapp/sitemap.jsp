@@ -6,8 +6,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-	<url><loc>/</loc></url>
+	<url><loc><c:out value="${baseUrl}" />/</loc></url>
 	<c:forEach items="${movies}" var="m">
-		<url><loc>/movies/<c:out value="${m.cineplexKey}" /></loc></url>
+		<url><loc><c:out value="${baseUrl}" />/movies/<c:out value="${m.cineplexKey}" /></loc></url>
 	</c:forEach>
 </urlset>
