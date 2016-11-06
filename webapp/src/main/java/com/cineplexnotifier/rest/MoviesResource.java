@@ -3,6 +3,7 @@ package com.cineplexnotifier.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;

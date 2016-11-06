@@ -1,6 +1,7 @@
 package com.cineplexnotifier.util;
 
 import java.io.IOException;
+
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
