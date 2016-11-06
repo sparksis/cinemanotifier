@@ -227,6 +227,13 @@
 			<version>3.4.1.Final</version>
 		</dependency>
 
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
