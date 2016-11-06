@@ -10,7 +10,9 @@ public class Movie extends BaseModel {
 
 	private boolean available;
 	@Column(length = 4 * 1024) private String description;
-	private String name, cineplexKey, thumbnailImageUrl;
+	private String name, thumbnailImageUrl;
+	@Column(unique=true, nullable=false)
+	private String cineplexKey;
 	private byte[] thumbnailImage, posterImage;
 
 	public String getCineplexKey() {
