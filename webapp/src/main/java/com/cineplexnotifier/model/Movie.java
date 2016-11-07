@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
@@ -18,7 +19,8 @@ public class Movie extends BaseModel {
 	@Column(unique=true, nullable=false)
 	private String cineplexKey;
 	private byte[] thumbnailImage, posterImage;
-
+	
+	@XmlTransient
 	@ManyToMany(mappedBy="movies")
 	private List<User> users;
 

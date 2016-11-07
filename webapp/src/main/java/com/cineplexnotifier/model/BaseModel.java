@@ -14,9 +14,9 @@ public abstract class BaseModel {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@XmlTransient
 	private long id;
 	
+	@XmlTransient
 	public long getId() {
 		return id;
 	}

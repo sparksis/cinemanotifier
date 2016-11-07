@@ -7,8 +7,10 @@
 		<jta-data-source>java:jboss/datasources/notifier</jta-data-source>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
+
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.hbm2ddl.import_files" value="/movies.sql" />
+			
 			<property name="javax.persistence.schema-generation.create-database-schemas" value="false"></property>
 		</properties>
 	</persistence-unit>

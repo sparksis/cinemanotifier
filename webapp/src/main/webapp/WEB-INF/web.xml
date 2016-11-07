@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
+	<context-param>
+		<param-name>resteasy.providers</param-name>
+		<param-value>org.eclipse.persistence.jaxb.rs.MOXyJsonProvider</param-value>
+	</context-param>
+
 	<filter>
 		<filter-name>WebResourceOptimizer</filter-name>
 		<filter-class>ro.isdc.wro.http.WroFilter</filter-class>
