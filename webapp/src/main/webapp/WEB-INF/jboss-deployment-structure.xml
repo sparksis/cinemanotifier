@@ -1,0 +1,12 @@
+<jboss-deployment-structure>  
+    <deployment >  
+        <exclusions>  
+            <module name="org.jboss.resteasy.resteasy-jackson-provider" />  
+            <module name="org.jboss.resteasy.resteasy-jettison-provider" />  
+            <module name="org.jboss.resteasy.resteasy-jaxb-provider" />  
+        </exclusions>  
+        <dependencies>  
+            <module name="org.eclipse.persistence" />  
+        </dependencies>  
+    </deployment>  
+</jboss-deployment-structure>  
