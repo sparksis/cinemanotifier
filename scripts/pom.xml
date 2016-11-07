@@ -7,7 +7,7 @@
 
 	<parent>
 		<artifactId>parent</artifactId>
-		<groupId>com.sparksis.cineplex-notifier</groupId>
+		<groupId>com.cineplexnotifier</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
