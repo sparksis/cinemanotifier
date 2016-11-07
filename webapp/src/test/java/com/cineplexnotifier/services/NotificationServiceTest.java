@@ -18,6 +18,8 @@ import com.cineplexnotifier.model.Movie;
 import com.cineplexnotifier.model.User;
 import com.sendgrid.SendGrid;
 
+import static org.junit.Assert.*;
+
 /**
  * 
  * @author colton
@@ -30,7 +32,7 @@ public class NotificationServiceTest {
 	public static WebArchive createDeployment() {
 		File[] files = Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().resolve()
 				.withTransitivity().asFile();
-		
+
 		Logger.getAnonymousLogger().info(Arrays.toString(files));
 
 		return ShrinkWrap.create(WebArchive.class).addPackages(false, NotificationService.class.getPackage(),
@@ -49,9 +51,7 @@ public class NotificationServiceTest {
 		m.setAvailable(true);
 		m.getUsers().add(user);
 
-		instance.notifySubscribers(m);
-
-		Thread.sleep(2000);
+		assertNull(instance.notifySubscribers(m).get());
 	}
 
 }

@@ -2,7 +2,9 @@ package com.cineplexnotifier.services;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.concurrent.Future;
 
+import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -31,7 +33,7 @@ public class NotificationService implements Serializable {
 	private static final String BODY_MOVIE_NOW_AVAILABLE = SUBJECT_MOVIE_NOW_AVAILABLE;
 
 	@Asynchronous
-	public void notifySubscribers(Movie m) {
+	public Future<Void> notifySubscribers(Movie m)  {
 		if (m.isAvailable()) {
 			for (User u : m.getUsers()) {
 				Email from = new Email("no-reply@cineplexnotifier.com");
@@ -64,6 +66,7 @@ public class NotificationService implements Serializable {
 				}
 			}
 		}
+		return new AsyncResult<Void>(null);
 	}
 
 }
