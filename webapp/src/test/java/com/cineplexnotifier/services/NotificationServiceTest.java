@@ -41,7 +41,7 @@ public class NotificationServiceTest {
 	private NotificationService instance;
 
 	@Test
-	public void testNotiySubscribers() throws Exception {
+	public void testNotifySubscribers() throws Exception {
 		User user = new User("colton@cineplexnotifier.com");
 		Movie m = new Movie();
 		m.setName("Test Movie");
