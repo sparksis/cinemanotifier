@@ -255,6 +255,7 @@
 			<groupId>com.cineplexnotifier</groupId>
 			<artifactId>scripts</artifactId>
 			<version>${project.version}</version>
+			<classifier>sources</classifier>
 		</dependency>
 	</dependencies>
 
