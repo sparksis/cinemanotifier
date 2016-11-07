@@ -65,6 +65,8 @@ public class NotificationService implements Serializable {
 					Logger.getLogger(this.getClass().getName()).error(e);
 				}
 			}
+
+			m.getUsers().clear();
 		}
 		return new AsyncResult<Void>(null);
 	}
