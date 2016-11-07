@@ -1,5 +1,7 @@
 #!/usr/bin/groovy
 
+package com.cineplexnotifier.scripts;
+
 @Grapes([
     @Grab(group='net.sourceforge.htmlunit', module='htmlunit', version='2.13'),
     @Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.7.1')
@@ -9,6 +11,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
+
 
 
 def init(){
