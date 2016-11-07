@@ -1,7 +1,11 @@
 package com.cineplexnotifier.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -14,6 +18,9 @@ public class Movie extends BaseModel {
 	@Column(unique=true, nullable=false)
 	private String cineplexKey;
 	private byte[] thumbnailImage, posterImage;
+
+	@ManyToMany(mappedBy="movies")
+	private List<User> users;
 
 	public String getCineplexKey() {
 		return cineplexKey;
@@ -69,6 +76,13 @@ public class Movie extends BaseModel {
 
 	public void setThumbnailImageUrl(String thumbnailImageUrl) {
 		this.thumbnailImageUrl = thumbnailImageUrl;
+	}
+
+	public List<User> getUsers() {
+		if(users == null){
+			users = new LinkedList<>();
+		}
+		return users;
 	}
 
 }

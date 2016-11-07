@@ -234,6 +234,16 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.sendgrid</groupId>
+			<artifactId>sendgrid-java</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -336,46 +346,6 @@
 			</build>
 		</profile>
 		<profile>
-			<!-- Use this profile to use the wro4j plugin for validation, concatenation 
-				and -->
-			<!-- minification of JavaScript and CSS files during the build -->
-			<id>minify</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>ro.isdc.wro4j</groupId>
-						<artifactId>wro4j-maven-plugin</artifactId>
-						<version>${version.ro.isdc.wro4j}</version>
-						<executions>
-							<execution>
-								<phase>compile</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<targetGroups>app.min,screen.min</targetGroups>
-							<cssDestinationFolder>${project.build.directory}/${project.build.finalName}/css/</cssDestinationFolder>
-							<jsDestinationFolder>${project.build.directory}/${project.build.finalName}/js/</jsDestinationFolder>
-							<wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
-						</configuration>
-					</plugin>
-					<plugin>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>${version.surefire.plugin}</version>
-						<configuration>
-							<skip>true</skip>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
 
 			<!-- An optional Arquillian testing profile that executes tests in your 
 				WildFly instance -->
@@ -405,62 +375,6 @@
 				</dependency>
 			</dependencies>
 		</profile>
-
-		<profile>
-			<id>aerogearci-wildfly-managed</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.wildfly</groupId>
-					<artifactId>wildfly-arquillian-container-managed</artifactId>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>${version.surefire.plugin}</version>
-						<configuration>
-							<systemProperties>
-								<arquillian.launch>jbossci</arquillian.launch>
-								<arquillian.jboss_home>${project.build.directory}/wildfly-${version.wildfly}/
-								</arquillian.jboss_home>
-							</systemProperties>
-							<includes>
-								<include>**/*.java</include>
-							</includes>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-dependency-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>unpack-wildfly</id>
-								<phase>process-test-classes</phase>
-								<goals>
-									<goal>unpack</goal>
-								</goals>
-								<configuration>
-									<artifactItems>
-										<artifactItem>
-											<groupId>org.wildfly</groupId>
-											<artifactId>wildfly-dist</artifactId>
-											<version>${version.wildfly}</version>
-											<outputDirectory>${project.build.directory}</outputDirectory>
-											<type>zip</type>
-											<overWrite>false</overWrite>
-										</artifactItem>
-									</artifactItems>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
 	</profiles>
 
 </project>

@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -14,7 +14,7 @@ public class User extends BaseModel {
 	
 	@Column(unique = true)
 	private String email;
-	@OneToMany private List<Movie> movies;
+	@ManyToMany private List<Movie> movies;
 	
 	public User(){}
 
