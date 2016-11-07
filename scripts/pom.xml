@@ -93,5 +93,25 @@
 		</dependency>
 	</dependencies>
 
-
+	<profiles>
+		<profile>
+			<id>openshift</id>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>groupId>org.codehaus.gmavenplus					</groupId>
+							<artifactId>gmavenplus-plugin</artifactId>
+							<version>1.5</version>
+							<executions>
+								<execution>
+									<goals />
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
 </project>
