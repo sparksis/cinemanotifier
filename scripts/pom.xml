@@ -16,6 +16,22 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>addSources</goal>
+							<goal>addTestSources</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<invokeDynamic>true</invokeDynamic>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
@@ -70,48 +86,4 @@
 			<version>0.7.1</version>
 		</dependency>
 	</dependencies>
-
-	<profiles>
-		<profile>
-			<id>not-openshift</id>
-			<activation>
-				<property>
-					<name>!openshift</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.gmavenplus</groupId>
-						<artifactId>gmavenplus-plugin</artifactId>
-						<version>1.5</version>
-						<executions>
-							<execution>
-								<goals>
-									<goal>addSources</goal>
-									<goal>addTestSources</goal>
-									<goal>generateStubs</goal>
-									<goal>compile</goal>
-									<goal>testGenerateStubs</goal>
-									<goal>testCompile</goal>
-									<goal>removeStubs</goal>
-									<goal>removeTestStubs</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<invokeDynamic>true</invokeDynamic>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>openshift</id>
-			<properties>
-				<openshift>true</openshift>
-			</properties>
-		</profile>
-	</profiles>
 </project>
