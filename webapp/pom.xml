@@ -38,9 +38,9 @@
 
 		<!-- Define the version of the JBoss BOMs we want to import to specify 
 			tested stacks. -->
-		<version.jboss.bom>8.2.1.Final</version.jboss.bom>
+		<version.jboss.bom>8.2.2.Final</version.jboss.bom>
 
-		<version.wildfly>8.2.0.Final</version.wildfly>
+		<version.wildfly>10.0.1.0.Final</version.wildfly>
 		<version.resteasy>3.0.19.Final</version.resteasy>
 
 		<!-- Other dependency versions -->
@@ -199,7 +199,6 @@
 			<artifactId>arquillian-junit-container</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jboss.arquillian.protocol</groupId>
 			<artifactId>arquillian-protocol-servlet</artifactId>
@@ -210,14 +209,7 @@
 			<groupId>ro.isdc.wro4j</groupId>
 			<artifactId>wro4j-core</artifactId>
 			<version>${wro4j.version}</version>
-		</dependency>
-
-		<!-- Database Engine used by Persistance.xml for various read-only operations -->
-		<!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<version>10.12.1.1</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
@@ -226,7 +218,12 @@
 			<version>3.0</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.ocpsoft.rewrite</groupId>
@@ -235,11 +232,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-			<scope>provided</scope>
+			<groupId>org.secnod.shiro</groupId>
+			<artifactId>shiro-jersey</artifactId>
+			<version>0.2.0</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>com.sendgrid</groupId>
