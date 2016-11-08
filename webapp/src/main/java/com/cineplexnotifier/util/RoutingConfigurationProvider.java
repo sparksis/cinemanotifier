@@ -11,7 +11,7 @@ import org.ocpsoft.rewrite.servlet.config.HttpConfigurationProvider;
 import org.ocpsoft.rewrite.servlet.config.Path;
 
 @RewriteConfiguration
-public class RewriteConfigurationProvider extends HttpConfigurationProvider {
+public class RoutingConfigurationProvider extends HttpConfigurationProvider {
 	@Override
 	public int priority() {
 		return 10;
@@ -23,6 +23,10 @@ public class RewriteConfigurationProvider extends HttpConfigurationProvider {
 				.addRule()
 					.when(Direction.isInbound()
 						.and(Path.matches("/movies/{page}")))
+					.perform(Forward.to("/index.html"))
+				.addRule()
+					.when(Direction.isInbound()
+						.and(Path.matches("/privacypolicy")))
 					.perform(Forward.to("/index.html"))
 				;
 	}

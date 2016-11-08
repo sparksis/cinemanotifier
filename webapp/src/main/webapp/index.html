@@ -37,11 +37,22 @@
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
   }
+  
+  header{
+	height: 88px;  
+  }
+  main{
+    min-height: calc(100vh - 171px);
+  }
+  footer{
+  	margin-top: 1em;
+  	margin-bottom: 1em;
+  }
   </style>
 
 </head>
 <body ng-app="moviesApp" ng-controller="MoviesController as $ctrl" ng-cloak>
-  <div style="margin-bottom: 2em;">
+  <header id="head" style="margin-bottom: 2em;">
     <h1 class="md-display-2" style="margin-bottom: -.4em">
       <a href="/" >
         Cineplex Notifier
@@ -49,9 +60,15 @@
     </h1>
     <p class="md-caption">Cineplex Notifier is not in anyway affiliated with Cineplex Entertainment LP or their partners or subsidiaries.
       <br />  Cineplex Notifier is provided as-is without warranty of any kind.</p>
-    </div>
+    </header>
 
-    <ng-view></ng-view>
+	<main>
+	    <ng-view></ng-view>
+	</main>
+
+	<footer>
+		<a href="/privacypolicy#head">Privacy Policy</a>
+	</footer>
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

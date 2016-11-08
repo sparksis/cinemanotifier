@@ -6,6 +6,8 @@ angular.module("moviesApp").config(
 
 					$routeProvider.when('/movies/:movie', {
 						template : '<email-signup></email-signup>'
+					}).when('/privacypolicy',{
+						templateUrl : 'resources/pages/privacypolicy.html'
 					}).when('/', {
 						templateUrl : 'resources/pages/default.html'
 					});
