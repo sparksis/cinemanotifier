@@ -6,8 +6,8 @@ import java.util.concurrent.Future;
 
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import org.jboss.logging.Logger;
 
@@ -26,8 +26,8 @@ import com.sendgrid.SendGrid;
 @SuppressWarnings("serial")
 public class NotificationService implements Serializable {
 
-	@EJB
-	private SendGridFactory sendGridFactory;
+	@Inject
+	private SendGrid sendGrid;
 
 	private static final String SUBJECT_MOVIE_NOW_AVAILABLE = "Tickets for %s are now available from cineplex.com!";
 	private static final String BODY_MOVIE_NOW_AVAILABLE = SUBJECT_MOVIE_NOW_AVAILABLE;
@@ -51,13 +51,12 @@ public class NotificationService implements Serializable {
 
 				mail.sendAt();
 
-				SendGrid sg = sendGridFactory.get();
 				Request request = new Request();
 				try {
 					request.method = Method.POST;
 					request.endpoint = "mail/send";
 					request.body = mail.build();
-					Response response = sg.api(request);
+					Response response = sendGrid.api(request);
 					if (response.statusCode < 200 || response.statusCode >= 300) {
 						throw new IOException(response.toString());
 					}
