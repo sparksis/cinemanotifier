@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import com.cineplexnotifier.model.BaseModel;
 import com.cineplexnotifier.model.Movie;
 import com.cineplexnotifier.model.User;
+import com.cineplexnotifier.services.timers.ScrapeService;
 import com.sendgrid.SendGrid;
 
 import static org.junit.Assert.*;
@@ -30,13 +31,21 @@ public class NotificationServiceTest {
 
 	@Deployment
 	public static WebArchive createDeployment() {
-		File[] files = Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().resolve()
-				.withTransitivity().asFile();
+		File[] files = Maven.resolver()
+				.loadPomFromFile("pom.xml")
+				.importRuntimeDependencies()
+				.resolve().withTransitivity().asFile();
 
 		Logger.getAnonymousLogger().info(Arrays.toString(files));
 
-		return ShrinkWrap.create(WebArchive.class).addPackages(false, NotificationService.class.getPackage(),
-				BaseModel.class.getPackage(), SendGrid.class.getPackage()).addAsLibraries(files);
+		return ShrinkWrap.create(WebArchive.class)
+				.addPackages(false,
+					NotificationService.class.getPackage(),
+					BaseModel.class.getPackage()
+				)
+				// Do not include the timers
+				.deletePackage(ScrapeService.class.getPackage())
+				.addAsLibraries(files);
 	}
 
 	@EJB
