@@ -62,8 +62,8 @@ package com.cineplexnotifier.scripts;
         return null;
       }
 
-      def publish(movie){
-        def http = new HTTPBuilder('http://localhost:8080')
+      def publish(baseUrl, movie){
+        def http = new HTTPBuilder(baseUrl)
         http.request( POST ) {
           uri.path = '/rest/movies/'
           requestContentType = JSON
@@ -77,6 +77,10 @@ package com.cineplexnotifier.scripts;
       }
 
       public static void main(String... args){
+        def targetUrl = 'http://localhost:8080';
+        if(args.length>0) {
+          targetUrl = args[0];
+        }
         def THIS = new ScrapeOrigin();
         for (int i = 1;i <= 20;i++) {
           println "Reading Page:         ${i}"
@@ -87,8 +91,8 @@ package com.cineplexnotifier.scripts;
             def listing = THIS.loadListing(it.cineplexKey);
             it.description = THIS.findDescription(listing);
             it.posterImage = THIS.findPosterImage(listing);
-
-            THIS.publish(it);
+            
+            THIS.publish(targetUrl, it);
           }
           Thread.sleep(3000);
         }
