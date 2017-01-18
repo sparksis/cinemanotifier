@@ -1,6 +1,6 @@
 node { 
     stage('SCM Checkout') { 
-        git poll: false, url: 'git@github.com:sparksis/cineplex-notifier.git'
+        git url: 'git@github.com:sparksis/cineplex-notifier.git'
     }
     stage('Build') { 
         sh 'mvn clean install -DskipTests'
