@@ -25,12 +25,12 @@ public abstract class BaseRepository<T extends BaseModel> {
 		return getEntityManager().createQuery(cq).getResultList();
 	}
 
-	public List<T> selectById(long id) {
+	public T selectById(long id) {
 		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<T> cq = cb.createQuery(clazz);
 		Root<T> root= cq.from(clazz);
 		cq.select(root).where(cb.equal(root.get(BaseModel_.id),id));
-		return getEntityManager().createQuery(cq).getResultList();
+		return getEntityManager().createQuery(cq).getSingleResult();
 	}
 	
 	protected abstract EntityManager getEntityManager();
