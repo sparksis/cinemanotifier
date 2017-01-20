@@ -38,6 +38,5 @@
 
   <modules>
     <module>webapp</module>
-    <module>scripts</module>
   </modules>
 </project>

@@ -255,12 +255,6 @@
 			<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.cineplexnotifier</groupId>
-			<artifactId>scripts</artifactId>
-			<version>${project.version}</version>
-			<classifier>sources</classifier>
-		</dependency>
 	</dependencies>
 
 	<build>
