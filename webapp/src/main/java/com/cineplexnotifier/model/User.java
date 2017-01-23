@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.NotImplementedException;
+
 @Entity
 @XmlRootElement
 public class User extends BaseModel {
@@ -35,6 +37,12 @@ public class User extends BaseModel {
 			movies = new LinkedList<>();
 		}
 		return movies;
+	}
+
+	@Override
+	public void merge(BaseModel m) {
+		//TODO: User:merge(BaseModel) 
+		throw new NotImplementedException("TODO: User:merge(BaseModel)");
 	}
 
 }

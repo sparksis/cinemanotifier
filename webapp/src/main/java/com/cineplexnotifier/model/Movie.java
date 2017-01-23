@@ -14,14 +14,15 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Movie extends BaseModel {
 
 	private boolean available;
-	@Column(length = 4 * 1024) private String description;
+	@Column(length = 4 * 1024)
+	private String description;
 	private String name, thumbnailImageUrl;
-	@Column(unique=true, nullable=false)
+	@Column(unique = true, nullable = false)
 	private String cineplexKey;
 	private byte[] thumbnailImage, posterImage;
-	
+
 	@XmlTransient
-	@ManyToMany(mappedBy="movies")
+	@ManyToMany(mappedBy = "movies")
 	private List<User> users;
 
 	public String getCineplexKey() {
@@ -81,10 +82,32 @@ public class Movie extends BaseModel {
 	}
 
 	public List<User> getUsers() {
-		if(users == null){
+		if (users == null) {
 			users = new LinkedList<>();
 		}
 		return users;
+	}
+
+	/**
+	 * Merges the following fields
+	 * <ul>
+	 * <li>name</li>
+	 * <li>available</li>
+	 * <li>description</li>
+	 * <li>thumbnailImageUrl</li>
+	 * </ul>
+	 */
+	@Override
+	public void merge(BaseModel m) {
+		if (!(m instanceof Movie)) {
+			throw new UnsupportedOperationException("Unable to merge non-movie type");
+		}
+		Movie movie = (Movie) m;
+
+		this.name = movie.name;
+		this.available = movie.available;
+		this.description = movie.description;
+		this.thumbnailImageUrl = movie.thumbnailImageUrl;
 	}
 
 }

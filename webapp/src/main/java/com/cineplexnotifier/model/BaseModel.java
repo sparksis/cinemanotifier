@@ -25,4 +25,6 @@ public abstract class BaseModel {
 		this.id = id;
 	}
 	
+	public abstract void merge(BaseModel m);
+	
 }

@@ -43,8 +43,8 @@ public class MoviesResource {
 		URI r = new URI(m.getCineplexKey());
 		Movie old = movieDao.selectByCineplexKey(m.getCineplexKey());
 		if (old != null) {
-			m.setId(old.getId());
-			movieDao.update(m);
+			old.merge(m);
+			movieDao.update(old);
 
 			// TODO formalize REST conventions used by this app
 			return Response.created(r).build();
