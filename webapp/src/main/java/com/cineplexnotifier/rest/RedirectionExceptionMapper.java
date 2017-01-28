@@ -14,8 +14,8 @@ import javax.ws.rs.ext.ExceptionMapper;
 @Provider
 public class RedirectionExceptionMapper implements ExceptionMapper<RedirectionException> {
 
-	@Override
-	public Response toResponse(RedirectionException exception) {
-		return exception.getResponse();
-	}
+  @Override
+  public Response toResponse(RedirectionException exception) {
+    return exception.getResponse();
+  }
 }

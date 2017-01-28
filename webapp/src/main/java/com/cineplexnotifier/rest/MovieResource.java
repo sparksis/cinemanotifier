@@ -22,17 +22,17 @@ import com.cineplexnotifier.model.Movie;
 @Consumes(MediaType.APPLICATION_JSON)
 public interface MovieResource {
 
-	@GET
-	@Path("/")
-	@Cache(maxAge = 600)
-	List<Movie> getMovies(@DefaultValue(value = "false") @QueryParam("all") boolean available);
+  @GET
+  @Path("/")
+  @Cache(maxAge = 600)
+  List<Movie> getMovies(@DefaultValue(value = "false") @QueryParam("all") boolean available);
 
-	@POST
-	@Path("/")
-	Response postMovie(Movie m);
+  @POST
+  @Path("/")
+  Response postMovie(Movie m);
 
-	@GET
-	@Path("{id}")
-	Movie getMovieByCineplexKey(@PathParam("id") String cineplexKey);
+  @GET
+  @Path("{id}")
+  Movie getMovieByCineplexKey(@PathParam("id") String cineplexKey);
 
 }

@@ -20,26 +20,26 @@ import static org.junit.Assert.*;
 @RunWith(Arquillian.class)
 public class NotificationServiceTest {
 
-	@Deployment
-	public static WebArchive createDeployment() {
-		return ArquillianHelper.getDefaultShrinkWrap();
-	}
+  @Deployment
+  public static WebArchive createDeployment() {
+    return ArquillianHelper.getDefaultShrinkWrap();
+  }
 
-	@EJB
-	private NotificationService instance;
+  @EJB
+  private NotificationService instance;
 
-	@Test
-	public void testNotifySubscribers() throws Exception {
-		User user = new User("colton@cineplexnotifier.com");
-		Movie m = new Movie();
-		m.setName("Test Movie");
-		m.setCineplexKey("test-movie");
-		m.setAvailable(true);
-		m.getUsers().add(user);
+  @Test
+  public void testNotifySubscribers() throws Exception {
+    User user = new User("colton@cineplexnotifier.com");
+    Movie m = new Movie();
+    m.setName("Test Movie");
+    m.setCineplexKey("test-movie");
+    m.setAvailable(true);
+    m.getUsers().add(user);
 
-		instance.notifySubscribers(m);
+    instance.notifySubscribers(m);
 
-		assertTrue(m.getUsers().isEmpty());
-	}
+    assertTrue(m.getUsers().isEmpty());
+  }
 
 }

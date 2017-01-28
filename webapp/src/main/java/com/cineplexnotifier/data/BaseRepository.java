@@ -12,40 +12,41 @@ import com.cineplexnotifier.model.BaseModel_;
 
 public abstract class BaseRepository<T extends BaseModel> {
 
-	private Class<T> clazz;
-	public BaseRepository(Class<T> clazz) {
-		this.clazz = clazz;
-	}
+  private Class<T> clazz;
+
+  public BaseRepository(Class<T> clazz) {
+    this.clazz = clazz;
+  }
 
 
-	public List<T> selectAll() {
-		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
-		cq.select(cq.from(clazz));
-		return getEntityManager().createQuery(cq).getResultList();
-	}
+  public List<T> selectAll() {
+    CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+    CriteriaQuery<T> cq = cb.createQuery(clazz);
+    cq.select(cq.from(clazz));
+    return getEntityManager().createQuery(cq).getResultList();
+  }
 
-	public T selectById(long id) {
-		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
-		Root<T> root= cq.from(clazz);
-		cq.select(root).where(cb.equal(root.get(BaseModel_.id),id));
-		return getEntityManager().createQuery(cq).getSingleResult();
-	}
-	
-	protected abstract EntityManager getEntityManager();
-	
-	public long insert(T model){
-		getEntityManager().persist(model);
-		return model.getId();
-	}
+  public T selectById(long id) {
+    CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+    CriteriaQuery<T> cq = cb.createQuery(clazz);
+    Root<T> root = cq.from(clazz);
+    cq.select(root).where(cb.equal(root.get(BaseModel_.id), id));
+    return getEntityManager().createQuery(cq).getSingleResult();
+  }
 
-	public void update(T model){
-		getEntityManager().merge(model);
-	}
-	
-	public void delete(T model){
-		getEntityManager().remove(model);
-	}
-	
+  protected abstract EntityManager getEntityManager();
+
+  public long insert(T model) {
+    getEntityManager().persist(model);
+    return model.getId();
+  }
+
+  public void update(T model) {
+    getEntityManager().merge(model);
+  }
+
+  public void delete(T model) {
+    getEntityManager().remove(model);
+  }
+
 }

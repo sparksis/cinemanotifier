@@ -24,38 +24,38 @@ import com.cineplexnotifier.model.User;
 @Stateless
 public class UserResource {
 
-	@EJB
-	private UserRepository dao;
-	@EJB
-	private MovieRepository movieRepository;
+  @EJB
+  private UserRepository dao;
+  @EJB
+  private MovieRepository movieRepository;
 
-	@EJB
-	private UserResource ejb;
-	
-	@POST
-	@Path("{email}/subscribe")
-	public void subscribe(@PathParam("email") String email, String... cineplexKeys) {
-		User user = dao.selectByEmailAddress(email);
+  @EJB
+  private UserResource ejb;
 
-		// get database attached user
-		user = dao.selectByEmailAddress(email);
-		// if user doesn't exist sign them up automatically
-		if (user == null) {
-			user = signupUser(email);
-		}
+  @POST
+  @Path("{email}/subscribe")
+  public void subscribe(@PathParam("email") String email, String... cineplexKeys) {
+    User user = dao.selectByEmailAddress(email);
 
-		List<Movie> movies = user.getMovies();
-		for (String key : cineplexKeys) {
-			movies.add(movieRepository.selectByCineplexKey(key));
-		}
+    // get database attached user
+    user = dao.selectByEmailAddress(email);
+    // if user doesn't exist sign them up automatically
+    if (user == null) {
+      user = signupUser(email);
+    }
 
-	}
-	
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public User signupUser(String email){
-		User user = new User(email);
-		dao.insert(user);
-		// TODO send welcome email or create UserManagement EJB
-		return user;
-	}
+    List<Movie> movies = user.getMovies();
+    for (String key : cineplexKeys) {
+      movies.add(movieRepository.selectByCineplexKey(key));
+    }
+
+  }
+
+  @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+  public User signupUser(String email) {
+    User user = new User(email);
+    dao.insert(user);
+    // TODO send welcome email or create UserManagement EJB
+    return user;
+  }
 }

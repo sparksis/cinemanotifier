@@ -11,22 +11,22 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns="/*")
+@WebFilter(urlPatterns = "/*")
 public class CacheFilter implements Filter {
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
-			throws IOException, ServletException {
-		HttpServletResponse httpResponse = ((HttpServletResponse)response);
-				
-		filterChain.doFilter(request, response);
-		httpResponse.setHeader("Cache-Control", "max-age=600");
-	}
+  @Override
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+      throws IOException, ServletException {
+    HttpServletResponse httpResponse = ((HttpServletResponse) response);
 
-	@Override
-	public void destroy() {	}
+    filterChain.doFilter(request, response);
+    httpResponse.setHeader("Cache-Control", "max-age=600");
+  }
 
-	@Override
-	public void init(FilterConfig arg0) throws ServletException { }
+  @Override
+  public void destroy() {}
+
+  @Override
+  public void init(FilterConfig arg0) throws ServletException {}
 
 }

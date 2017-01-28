@@ -23,29 +23,33 @@ import com.cineplexnotifier.data.MovieRepository;
 @Produces("image/jpeg")
 public class ImageResouce {
 
-	public static final String MISSING_THUMBNAIL_URL = "http://mediafiles.cineplex.com/Cineplex2013/postermissing_230x341.jpg";
-	public static final String REPLACEMENT_MISSING_THUMBNAIL_URL = "../resources/images/imagenotavailable.png";
+  public static final String MISSING_THUMBNAIL_URL =
+      "http://mediafiles.cineplex.com/Cineplex2013/postermissing_230x341.jpg";
+  public static final String REPLACEMENT_MISSING_THUMBNAIL_URL =
+      "../resources/images/imagenotavailable.png";
 
-	@EJB
-	private MovieRepository dao;
+  @EJB
+  private MovieRepository dao;
 
-	@GET
-	@Path("thumbnail/{cineplexKey}.jpg")
-	@Cache
-	public byte[] getThumbnail(@PathParam("cineplexKey") String key) throws IOException, URISyntaxException {
-		String remoteUrl = dao.selectByCineplexKey(key).getThumbnailImageUrl();
+  @GET
+  @Path("thumbnail/{cineplexKey}.jpg")
+  @Cache
+  public byte[] getThumbnail(@PathParam("cineplexKey") String key)
+      throws IOException, URISyntaxException {
+    String remoteUrl = dao.selectByCineplexKey(key).getThumbnailImageUrl();
 
-		// Do not deliver the not found images from our server as they contain
-		// the Cineplex logo
-		if (MISSING_THUMBNAIL_URL.equals(remoteUrl)) {
-			throw new RedirectionException(Status.MOVED_PERMANENTLY, new URI(REPLACEMENT_MISSING_THUMBNAIL_URL));
-		}
+    // Do not deliver the not found images from our server as they contain
+    // the Cineplex logo
+    if (MISSING_THUMBNAIL_URL.equals(remoteUrl)) {
+      throw new RedirectionException(Status.MOVED_PERMANENTLY,
+          new URI(REPLACEMENT_MISSING_THUMBNAIL_URL));
+    }
 
-		URL remote = new URL(remoteUrl);
-		InputStream stream = remote.openStream();
-		byte[] r = IOUtils.toByteArray(stream);
-		IOUtils.closeQuietly(stream);
-		return r;
-	}
+    URL remote = new URL(remoteUrl);
+    InputStream stream = remote.openStream();
+    byte[] r = IOUtils.toByteArray(stream);
+    IOUtils.closeQuietly(stream);
+    return r;
+  }
 
 }

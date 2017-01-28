@@ -12,23 +12,18 @@ import org.ocpsoft.rewrite.servlet.config.Path;
 
 @RewriteConfiguration
 public class RoutingConfigurationProvider extends HttpConfigurationProvider {
-	@Override
-	public int priority() {
-		return 10;
-	}
+  @Override
+  public int priority() {
+    return 10;
+  }
 
-	@Override
-	public Configuration getConfiguration(final ServletContext context) {
-		return ConfigurationBuilder.begin()
-				.addRule()
-					.when(Direction.isInbound()
-						.and(Path.matches("/movies/{page}")))
-					.perform(Forward.to("/index.html"))
-				.addRule()
-					.when(Direction.isInbound()
-						.and(Path.matches("/privacypolicy")))
-					.perform(Forward.to("/index.html"))
-				;
-	}
+  @Override
+  public Configuration getConfiguration(final ServletContext context) {
+    return ConfigurationBuilder.begin().addRule()
+        .when(Direction.isInbound().and(Path.matches("/movies/{page}")))
+        .perform(Forward.to("/index.html")).addRule()
+        .when(Direction.isInbound().and(Path.matches("/privacypolicy")))
+        .perform(Forward.to("/index.html"));
+  }
 
 }

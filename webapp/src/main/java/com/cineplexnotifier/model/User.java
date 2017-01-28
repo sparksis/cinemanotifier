@@ -12,37 +12,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class User extends BaseModel {
 
-	@Column(unique = true)
-	private String email;
-	@ManyToMany
-	private List<Movie> movies;
+  @Column(unique = true)
+  private String email;
+  @ManyToMany
+  private List<Movie> movies;
 
-	public User() {
-	}
+  public User() {}
 
-	public User(String emailAddress) {
-		this.email = emailAddress;
-	}
+  public User(String emailAddress) {
+    this.email = emailAddress;
+  }
 
-	public String getEmail() {
-		return email;
-	}
+  public String getEmail() {
+    return email;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-	public List<Movie> getMovies() {
-		if (movies == null) {
-			movies = new LinkedList<>();
-		}
-		return movies;
-	}
+  public List<Movie> getMovies() {
+    if (movies == null) {
+      movies = new LinkedList<>();
+    }
+    return movies;
+  }
 
-	@Override
-	public void merge(BaseModel m) {
-		// TODO: User:merge(BaseModel)
-		throw new UnsupportedOperationException("TODO: User:merge(BaseModel)");
-	}
+  @Override
+  public void merge(BaseModel m) {
+    // TODO: User:merge(BaseModel)
+    throw new UnsupportedOperationException("TODO: User:merge(BaseModel)");
+  }
 
 }

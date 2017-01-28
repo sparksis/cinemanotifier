@@ -16,36 +16,36 @@ import com.cineplexnotifier.model.Movie_;
 @Stateless
 public class MovieRepository extends BaseRepository<Movie> {
 
-	@PersistenceContext
-	private EntityManager em;
+  @PersistenceContext
+  private EntityManager em;
 
-	public MovieRepository() {
-		super(Movie.class);
-	}
+  public MovieRepository() {
+    super(Movie.class);
+  }
 
-	@Override
-	protected EntityManager getEntityManager() {
-		return em;
-	}
+  @Override
+  protected EntityManager getEntityManager() {
+    return em;
+  }
 
-	public List<Movie> selectByAvailability(boolean available) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
-		Root<Movie> root = cq.from(Movie.class);
-		cq.select(root).where(cb.equal(root.get(Movie_.available), available));
-		return em.createQuery(cq).getResultList();
-	}
+  public List<Movie> selectByAvailability(boolean available) {
+    CriteriaBuilder cb = em.getCriteriaBuilder();
+    CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
+    Root<Movie> root = cq.from(Movie.class);
+    cq.select(root).where(cb.equal(root.get(Movie_.available), available));
+    return em.createQuery(cq).getResultList();
+  }
 
-	public Movie selectByCineplexKey(String key) {
-		try {
-			CriteriaBuilder cb = em.getCriteriaBuilder();
-			CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
-			Root<Movie> root = cq.from(Movie.class);
-			cq.select(root).where(cb.equal(root.get(Movie_.cineplexKey), key)).distinct(true);
-			return em.createQuery(cq).getSingleResult();
-		} catch (NoResultException nre) {
-			return null;
-		}
-	}
+  public Movie selectByCineplexKey(String key) {
+    try {
+      CriteriaBuilder cb = em.getCriteriaBuilder();
+      CriteriaQuery<Movie> cq = cb.createQuery(Movie.class);
+      Root<Movie> root = cq.from(Movie.class);
+      cq.select(root).where(cb.equal(root.get(Movie_.cineplexKey), key)).distinct(true);
+      return em.createQuery(cq).getSingleResult();
+    } catch (NoResultException nre) {
+      return null;
+    }
+  }
 
 }
