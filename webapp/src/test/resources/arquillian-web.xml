@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- test/*/ArquillianHelper.java uses this in getDefaultShrinkWrap to ensure a 
+	production like deployment with shrink wrapped code -->
+<web-app>
+	<context-param>
+		<param-name>resteasy.providers</param-name>
+		<param-value>org.eclipse.persistence.jaxb.rs.MOXyJsonProvider
+		</param-value>
+	</context-param>
+</web-app>
