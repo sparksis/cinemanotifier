@@ -8,17 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.apache.commons.lang3.NotImplementedException;
-
 @Entity
 @XmlRootElement
 public class User extends BaseModel {
-	
+
 	@Column(unique = true)
 	private String email;
-	@ManyToMany private List<Movie> movies;
-	
-	public User(){}
+	@ManyToMany
+	private List<Movie> movies;
+
+	public User() {
+	}
 
 	public User(String emailAddress) {
 		this.email = emailAddress;
@@ -41,8 +41,8 @@ public class User extends BaseModel {
 
 	@Override
 	public void merge(BaseModel m) {
-		//TODO: User:merge(BaseModel) 
-		throw new NotImplementedException("TODO: User:merge(BaseModel)");
+		// TODO: User:merge(BaseModel)
+		throw new UnsupportedOperationException("TODO: User:merge(BaseModel)");
 	}
 
 }
