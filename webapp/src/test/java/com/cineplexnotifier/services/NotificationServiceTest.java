@@ -1,23 +1,18 @@
 package com.cineplexnotifier.services;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.logging.Logger;
-
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.cineplexnotifier.model.BaseModel;
+import com.cineplexnotifier.data.MovieRepository;
 import com.cineplexnotifier.model.Movie;
 import com.cineplexnotifier.model.User;
-
 import static org.junit.Assert.*;
 
 /**
@@ -26,7 +21,6 @@ import static org.junit.Assert.*;
  *
  */
 @RunWith(Arquillian.class)
-@Ignore
 public class NotificationServiceTest {
 
 	@Deployment
@@ -34,15 +28,15 @@ public class NotificationServiceTest {
 		File[] files = Maven.resolver()
 				.loadPomFromFile("pom.xml")
 				.importRuntimeDependencies()
-				.resolve().withTransitivity().asFile();
-
-		Logger.getAnonymousLogger().info(Arrays.toString(files));
+				.resolve().withTransitivity()
+				.asFile();
 
 		return ShrinkWrap.create(WebArchive.class)
-				.addPackages(false,
-					NotificationService.class.getPackage(),
-					BaseModel.class.getPackage()
-				)
+				.addPackages(false, 
+						NotificationService.class.getPackage(),
+						MovieRepository.class.getPackage(),
+						Movie.class.getPackage()
+				).addAsResource("META-INF/persistence.xml")
 				.addAsLibraries(files);
 	}
 
