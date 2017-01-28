@@ -19,7 +19,6 @@ public class Movie extends BaseModel {
   private String name, thumbnailImageUrl;
   @Column(unique = true, nullable = false)
   private String cineplexKey;
-  private byte[] thumbnailImage, posterImage;
 
   @XmlTransient
   @ManyToMany(mappedBy = "movies")
@@ -35,14 +34,6 @@ public class Movie extends BaseModel {
 
   public String getName() {
     return name;
-  }
-
-  public byte[] getPosterImage() {
-    return posterImage;
-  }
-
-  public byte[] getThumbnailImage() {
-    return thumbnailImage;
   }
 
   public String getThumbnailImageUrl() {
@@ -67,14 +58,6 @@ public class Movie extends BaseModel {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public void setPosterImage(byte[] posterImage) {
-    this.posterImage = posterImage;
-  }
-
-  public void setThumbnailImage(byte[] thumbnailImage) {
-    this.thumbnailImage = thumbnailImage;
   }
 
   public void setThumbnailImageUrl(String thumbnailImageUrl) {
