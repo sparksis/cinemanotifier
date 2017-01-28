@@ -29,7 +29,7 @@ public interface MovieResource {
 
 	@POST
 	@Path("/")
-	Response putMovie(Movie m);
+	Response postMovie(Movie m);
 
 	@GET
 	@Path("{id}")

@@ -13,12 +13,15 @@ import javax.ws.rs.core.Response.Status;
 
 import com.cineplexnotifier.data.MovieRepository;
 import com.cineplexnotifier.model.Movie;
+import com.cineplexnotifier.services.NotificationService;
 
 @Stateless
 @Local(MovieResource.class)
 public class MovieResourceBean implements MovieResource {
 	@EJB
 	private MovieRepository movieDao;
+	@EJB
+	private NotificationService notificationService;
 
 	@Override
 	public List<Movie> getMovies(boolean available) {
@@ -26,24 +29,29 @@ public class MovieResourceBean implements MovieResource {
 	}
 
 	@Override
-	public Response putMovie(Movie m) {
+	public Response postMovie(Movie m) {
 		URI r;
 		try {
 			r = new URI(m.getCineplexKey());
 		} catch (URISyntaxException e) {
 			throw new WebApplicationException("Bad cineplexKey", Status.INTERNAL_SERVER_ERROR);
 		}
-		Movie old = movieDao.selectByCineplexKey(m.getCineplexKey());
-		if (old != null) {
-			old.merge(m);
-			movieDao.update(old);
+		Movie dbMovie = movieDao.selectByCineplexKey(m.getCineplexKey());
+		if (dbMovie == null) {
+			movieDao.insert(m);
+			return Response.created(r).build();
+		} else {
+			// First check to see if the movie is newly available
+			boolean notifyUsers = m.isAvailable() && !dbMovie.isAvailable();
 
-			// TODO formalize REST conventions used by this app
-			return Response.created(r).build();
-		} else if (m.getId() == 0l && movieDao.insert(m) != 0l) {
-			return Response.created(r).build();
+			dbMovie.merge(m);
+			movieDao.update(dbMovie);
+
+			if (notifyUsers) {
+				notificationService.notifySubscribers(dbMovie.getId());
+			}
+			return Response.ok(r).build();
 		}
-		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
 	}
 
 	@Override
