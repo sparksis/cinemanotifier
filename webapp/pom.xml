@@ -204,7 +204,14 @@
 			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<!-- resteasy client for testing the rest services -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>${version.resteasy}</version>
+			<scope>test</scope>
+		</dependency>
+	
 		<dependency>
 			<groupId>ro.isdc.wro4j</groupId>
 			<artifactId>wro4j-core</artifactId>
