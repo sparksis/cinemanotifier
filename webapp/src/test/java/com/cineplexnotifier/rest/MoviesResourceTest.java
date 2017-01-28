@@ -35,14 +35,22 @@ public class MoviesResourceTest {
 	@RunAsClient
 	@InSequence(value = 1)
 	public void testMovieCreation(@ArquillianResource URL url) {
+		final String MOVIE_NAME = MoviesResourceTest.class.getName() + "_testMovieCreation";
 		Movie m = new Movie();
-		m.setCineplexKey(MoviesResourceTest.class.getName() + "_testMovieCreation");
-		m.setDescription("A movie");
-		m.setThumbnailImageUrl("http://example.org/");
-		
+		m.setCineplexKey(MOVIE_NAME + "_KEY");
+		m.setName(MOVIE_NAME + "_NAME");
+		m.setDescription(MOVIE_NAME + "_DESCRIPTION");
+		m.setThumbnailImageUrl("http://example.org/" + MOVIE_NAME);
+
 		MovieResource client = ArquillianHelper.createResteasyClientProxy(url, MovieResource.class);
 		Response r = client.putMovie(m);
 		assertEquals(Status.CREATED, Status.fromStatusCode(r.getStatus()));
+		r.close();
+
+		Movie fromServer = client.getMovieByCineplexKey(m.getCineplexKey());
+		assertEquals(m.getName(), fromServer.getName());
+		assertEquals(m.getDescription(), fromServer.getDescription());
+		assertEquals(m.getThumbnailImageUrl(), fromServer.getThumbnailImageUrl());
 	}
 
 }
