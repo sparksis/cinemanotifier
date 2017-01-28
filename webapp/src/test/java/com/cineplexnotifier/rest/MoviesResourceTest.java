@@ -24,8 +24,8 @@ public class MoviesResourceTest {
 	public static WebArchive createDeployment() {
 		return ArquillianHelper.getDefaultShrinkWrap()
 				.addClasses(
-						IMoviesResource.class,
-						MoviesResource.class
+						MovieResource.class,
+						MovieResourceBean.class
 				);
 	}
 
@@ -36,7 +36,7 @@ public class MoviesResourceTest {
 		client.register(MOXyJsonProvider.class);
 		ResteasyWebTarget target = (ResteasyWebTarget) client.target(url.toString());
 
-		IMoviesResource simple = target.proxy(IMoviesResource.class);
+		MovieResource simple = target.proxy(MovieResource.class);
 		simple.putMovie(new Movie());
 	}
 

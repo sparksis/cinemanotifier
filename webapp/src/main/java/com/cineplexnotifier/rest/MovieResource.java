@@ -19,7 +19,7 @@ import com.cineplexnotifier.model.Movie;
 @Path("movies")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public interface IMoviesResource {
+public interface MovieResource {
 
 	@GET
 	@Path("/")
