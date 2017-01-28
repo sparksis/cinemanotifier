@@ -11,6 +11,7 @@ node {
                 sh 'mvn -P arq-wildfly-managed clean test'
             }
         }
+        junit '**/surefire-reports/*.xml'
     }
     stage('Deploy') {
         sh 'git push -f ssh://582052912d5271024a000027@cineplexnotifierdev-sparksis.rhcloud.com/~/git/cineplexnotifierdev.git/'
