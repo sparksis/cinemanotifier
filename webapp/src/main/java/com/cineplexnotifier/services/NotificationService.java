@@ -2,15 +2,14 @@ package com.cineplexnotifier.services;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.concurrent.Future;
-
-import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.jboss.logging.Logger;
 
+import com.cineplexnotifier.data.MovieRepository;
 import com.cineplexnotifier.model.Movie;
 import com.cineplexnotifier.model.User;
 import com.sendgrid.Content;
@@ -29,11 +28,25 @@ public class NotificationService implements Serializable {
 	@Inject
 	private SendGrid sendGrid;
 
+	@EJB
+	private MovieRepository movieRepository;
+
 	private static final String SUBJECT_MOVIE_NOW_AVAILABLE = "Tickets for %s are now available from cineplex.com!";
 	private static final String BODY_MOVIE_NOW_AVAILABLE = SUBJECT_MOVIE_NOW_AVAILABLE;
 
 	@Asynchronous
-	public Future<Void> notifySubscribers(Movie m)  {
+	public void notifySubscribers(long movieId) {
+		Movie m = movieRepository.selectById(movieId);
+		notifySubscribers(m);
+	}
+
+	/**
+	 * Sends an email to all users who have requested that they be emailed when
+	 * a movie becomes available
+	 * 
+	 * @param movieId
+	 */
+	public void notifySubscribers(Movie m) {
 		if (m.isAvailable()) {
 			for (User u : m.getUsers()) {
 				Email from = new Email("no-reply@cineplexnotifier.com");
@@ -64,8 +77,8 @@ public class NotificationService implements Serializable {
 					Logger.getLogger(this.getClass().getName()).error(e);
 				}
 			}
+			m.getUsers().clear();
 		}
-		return new AsyncResult<Void>(null);
 	}
 
 }

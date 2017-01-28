@@ -10,6 +10,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -25,6 +26,7 @@ import static org.junit.Assert.*;
  *
  */
 @RunWith(Arquillian.class)
+@Ignore
 public class NotificationServiceTest {
 
 	@Deployment
@@ -55,8 +57,10 @@ public class NotificationServiceTest {
 		m.setCineplexKey("test-movie");
 		m.setAvailable(true);
 		m.getUsers().add(user);
-
-		assertNull(instance.notifySubscribers(m).get());
+		
+		instance.notifySubscribers(m);
+		
+		assertTrue(m.getUsers().isEmpty());
 	}
 
 }
