@@ -6,7 +6,7 @@ INSTALLER="${DOWNLOAD_DIR}/wildfly-10.1.0.Final.tar.gz"
 TARGET_JBOSS_HOME="${WORKING_DIR}/wildfly-10.1.0.Final"
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-SERVER_CONFIG_SRC="$(dirname ${SCRIPT_DIR})/.openshift/config/standalone.xml"
+SERVER_CONFIG_SRC="$(dirname ${SCRIPT_DIR})/.openshift/config/standalone-dev.xml"
 SERVER_CONFIG_DST="${TARGET_JBOSS_HOME}/standalone/configuration/standalone.xml"
 
 
