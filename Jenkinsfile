@@ -8,7 +8,7 @@ node {
     stage('Test') {
         withEnv(['JBOSS_HOME=/tmp/cinemanotifier/wildfly-10.1.0.Final']){
             withCredentials([string(credentialsId: 'SENDGRID_API_KEY', variable: 'SENDGRID_API_KEY')]) {
-                sh 'mvn -P arq-wildfly-managed clean test'
+                sh 'mvn -P arq-wildfly-managed clean -Dmaven.test.failure.ignore=true test'
             }
         }
         junit '**/surefire-reports/*.xml'
