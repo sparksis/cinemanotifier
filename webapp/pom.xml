@@ -340,13 +340,11 @@
 				<executions>
 					<execution>
 						<id>ejb-client</id>
-						<phase>install</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>ejb</goal>
 						</goals>
 						<inherited>false</inherited>
-						<configuration>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
