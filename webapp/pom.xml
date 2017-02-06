@@ -331,6 +331,7 @@
 				<version>2.5.1</version>
 				<configuration>
 					<generateClient>true</generateClient>
+					<classifier>ejb</classifier>
 					<ejbVersion>3.0</ejbVersion>
 					<clientIncludes>
 						<clientInclude>com/cineplexnotifier/model/**</clientInclude>
