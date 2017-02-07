@@ -27,7 +27,7 @@ public class ImageResourceBean implements ImageResource {
    * @see com.cineplexnotifier.rest.IImageResource#getThumbnail(java.lang.String)
    */
   @Override
-  public byte[] getThumbnail(@PathParam("cineplexKey") String key)
+  public byte[] getThumbnail(String key)
       throws IOException, URISyntaxException {
     String remoteUrl = dao.selectByCineplexKey(key).getThumbnailImageUrl();
 

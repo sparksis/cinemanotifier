@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.jboss.resteasy.annotations.cache.Cache;
@@ -19,6 +20,6 @@ public interface ImageResource {
   @GET
   @Path("thumbnail/{cineplexKey}.jpg")
   @Cache
-  byte[] getThumbnail(String key) throws IOException, URISyntaxException;
+  byte[] getThumbnail(@PathParam("cineplexKey") String key) throws IOException, URISyntaxException;
 
 }
