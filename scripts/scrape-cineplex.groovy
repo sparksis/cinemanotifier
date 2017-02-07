@@ -2,13 +2,20 @@
 package com.cineplexnotifier.scripts;
 @Grapes([
   @Grab(group='net.sourceforge.htmlunit', module='htmlunit', version='2.13'),
-  @Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.7.1')
+  
+  // Needed for rest-easy json serialization
+  @Grab(group='org.eclipse.persistence', module='org.eclipse.persistence.moxy', version='2.6.4'),
+  //needed for the rest components in the ejb-client
+  @Grab(group='org.jboss.resteasy', module='resteasy-client', version='3.0.19.Final'),
+  @Grab(group='com.cineplexnotifier', module='webapp', version='1.0-SNAPSHOT', classifier='ejb-client'),
 ])
 import com.gargoylesoftware.htmlunit.WebClient;
 
-import groovyx.net.http.HTTPBuilder;
-import static groovyx.net.http.ContentType.*;
-import static groovyx.net.http.Method.*;
+import org.jboss.resteasy.client.jaxrs.*;
+
+import com.cineplexnotifier.model.*;
+import com.cineplexnotifier.rest.*;
+
 
 public class ScrapeOrigin{
   WebClient webClient;
@@ -27,7 +34,7 @@ public class ScrapeOrigin{
     def listings = listingsPage.querySelectorAll('.showtime-card');
     def r = [];
     listings.each{
-      def listing = [:]
+      def listing = new Movie();
 
       listing.available = it.getTextContent().contains("Buy Tickets");
 
@@ -57,23 +64,14 @@ public class ScrapeOrigin{
     }
   }
 
-  def findPosterImage(listing){
-    //TODO
-    return null;
-  }
-
   def publish(baseUrl, movie){
-    def http = new HTTPBuilder(baseUrl)
-    http.request( POST ) {
-      uri.path = '/rest/movies/'
-      requestContentType = JSON
-      body =  movie
-
-      response.success = { resp ->
-        println "POST response status: ${resp.statusLine}"
-        assert resp.statusLine.statusCode == 201
-      }
-    }
+	ResteasyClient client = new ResteasyClientBuilder().build();
+    client.register(org.eclipse.persistence.jaxb.rs.MOXyJsonProvider.class);
+	ResteasyWebTarget target = client.target(baseUrl+"/rest");
+	
+	MovieResource movieResource = target.proxy(MovieResource.class);
+	
+	movieResource.postMovie(movie);
   }
 
   public static void main(String... args){
@@ -90,7 +88,6 @@ public class ScrapeOrigin{
         println "Processing:           ${it.name} (${it.cineplexKey})";
         def listing = THIS.loadListing(it.cineplexKey);
         it.description = THIS.findDescription(listing);
-        it.posterImage = THIS.findPosterImage(listing);
           THIS.publish(targetUrl, it);
       }
       Thread.sleep(3000);
