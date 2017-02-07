@@ -62,7 +62,8 @@ public class Movie extends BaseModel {
   }
 
   public String getReleaseDate() {
-    return releaseDate.toString();
+    //Propagated nulls
+    return null == releaseDate ? null : releaseDate.toString();
   }
 
   public String getThumbnailImageUrl() {
