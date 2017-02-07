@@ -1,6 +1,7 @@
 package com.cineplexnotifier.rest;
 
 import java.net.URL;
+import java.time.LocalDate;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -28,6 +29,7 @@ public class MoviesResourceTest {
     m.setCineplexKey(MOVIE_NAME + "_KEY");
     m.setName(MOVIE_NAME + "_NAME");
     m.setDescription(MOVIE_NAME + "_DESCRIPTION");
+    m.setReleaseDate(LocalDate.now());
     m.setThumbnailImageUrl("http://example.org/" + MOVIE_NAME);
     return m;
   }
@@ -53,6 +55,7 @@ public class MoviesResourceTest {
     assertEquals(m.isAvailable(), fromServer.isAvailable());
     assertEquals(m.getName(), fromServer.getName());
     assertEquals(m.getDescription(), fromServer.getDescription());
+    assertEquals(m.getReleaseDate(), fromServer.getReleaseDate());
     assertEquals(m.getThumbnailImageUrl(), fromServer.getThumbnailImageUrl());
   }
 
@@ -72,6 +75,7 @@ public class MoviesResourceTest {
     m.setAvailable(true);
     m.setName(m.getName() + "UPDATED");
     m.setDescription(m.getDescription() + "UPDATED");
+    m.setReleaseDate(LocalDate.of(2099, 01, 01));
     m.setThumbnailImageUrl(m.getThumbnailImageUrl() + "UPDATED");
 
     // Put updated movie
@@ -86,6 +90,7 @@ public class MoviesResourceTest {
     assertEquals(m.isAvailable(), fromServer.isAvailable());
     assertEquals(m.getName(), fromServer.getName());
     assertEquals(m.getDescription(), fromServer.getDescription());
+    assertEquals(m.getReleaseDate(), fromServer.getReleaseDate());
     assertEquals(m.getThumbnailImageUrl(), fromServer.getThumbnailImageUrl());
   }
 
