@@ -22,9 +22,6 @@ public class UserResourceBean implements UserResource {
   @EJB
   private MovieRepository movieRepository;
 
-  @EJB
-  private UserResourceBean ejb;
-
   /* (non-Javadoc)
    * @see com.cineplexnotifier.rest.IUserResource#subscribe(java.lang.String, java.lang.String)
    */
