@@ -63,6 +63,18 @@ public class ScrapeOrigin{
         return null;
     }
   }
+  
+  def findReleaseDate(listing){
+  	final def searchPattern = ~'(January|February|March|April|May|June|July|August|September|October|November|December) \\d{1,2}, 20\\d\\d'
+  	final def simpleCalendarPattern = java.time.format.DateTimeFormatter.ofPattern("MMMM d',' yyyy");
+  	
+    def infoNode = listing.querySelector('p.movie-info');
+    
+    
+    def date = (infoNode.textContent=~ searchPattern)[0][0]
+    
+    return java.time.LocalDate.parse((java.lang.CharSequence)date, (java.time.format.DateTimeFormatter)simpleCalendarPattern);
+  }
 
   def publish(baseUrl, movie){
 	ResteasyClient client = new ResteasyClientBuilder().build();
@@ -87,6 +99,7 @@ public class ScrapeOrigin{
       results.each{
         println "Processing:           ${it.name} (${it.cineplexKey})";
         def listing = THIS.loadListing(it.cineplexKey);
+        it.setReleaseDate(THIS.findReleaseDate(listing));
         it.description = THIS.findDescription(listing);
           THIS.publish(targetUrl, it);
       }
