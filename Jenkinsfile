@@ -1,6 +1,6 @@
 node { 
     stage('SCM Checkout') { 
-        git url: 'git@github.com:sparksis/cineplex-notifier.git'
+        git branch: 'production', url: 'git@github.com:sparksis/cineplex-notifier.git'
     }
     stage('Build') { 
         sh 'mvn clean install -DskipTests'
@@ -9,6 +9,6 @@ node {
         sh 'mvn test'
     }
     stage('Deploy') {
-        sh 'git push -f ssh://582052912d5271024a000027@cineplexnotifierdev-sparksis.rhcloud.com/~/git/cineplexnotifierdev.git/'
+        sh 'git push -f ssh://57fc1c3f7628e14b7e00002d@cineplexnotifier-sparksis.rhcloud.com/~/git/cineplexnotifier.git/'
     }
 }
