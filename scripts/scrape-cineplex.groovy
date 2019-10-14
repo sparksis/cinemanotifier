@@ -2,7 +2,7 @@
 package com.cineplexnotifier.scripts;
 @Grapes([
   @Grab(group='net.sourceforge.htmlunit', module='htmlunit', version='2.13'),
-  
+
   // Needed for rest-easy json serialization
   @Grab(group='org.eclipse.persistence', module='org.eclipse.persistence.moxy', version='2.6.4'),
   //needed for the rest components in the ejb-client
@@ -63,16 +63,14 @@ public class ScrapeOrigin{
         return null;
     }
   }
-  
+
   def findReleaseDate(listing){
   	final def searchPattern = ~'(January|February|March|April|May|June|July|August|September|October|November|December) \\d{1,2}, 20\\d\\d'
   	final def simpleCalendarPattern = java.time.format.DateTimeFormatter.ofPattern("MMMM d',' yyyy");
-  	
-    def infoNode = listing.querySelector('p.movie-info');
-    
-    
+
+    def infoNode = listing.querySelector('.movie-specs-text');
     def date = (infoNode.textContent=~ searchPattern)[0][0]
-    
+
     return java.time.LocalDate.parse((java.lang.CharSequence)date, (java.time.format.DateTimeFormatter)simpleCalendarPattern);
   }
 
@@ -80,9 +78,9 @@ public class ScrapeOrigin{
 	ResteasyClient client = new ResteasyClientBuilder().build();
     client.register(org.eclipse.persistence.jaxb.rs.MOXyJsonProvider.class);
 	ResteasyWebTarget target = client.target(baseUrl+"/rest");
-	
+
 	MovieResource movieResource = target.proxy(MovieResource.class);
-	
+
 	movieResource.postMovie(movie);
   }
 
@@ -95,13 +93,22 @@ public class ScrapeOrigin{
     for (int i = 1;i <= 20;i++) {
       println "Reading Page:         ${i}"
       def results = THIS.lookupMovies("http://www.cineplex.com/Movies/ComingSoon?cmpid=MainSubNavEN_coming-soon&page=${i}");
+      def errorCount = 0;
 
       results.each{
         println "Processing:           ${it.name} (${it.cineplexKey})";
-        def listing = THIS.loadListing(it.cineplexKey);
-        it.setReleaseDate(THIS.findReleaseDate(listing));
-        it.description = THIS.findDescription(listing);
-          THIS.publish(targetUrl, it);
+        try {
+          def listing = THIS.loadListing(it.cineplexKey);
+          it.setReleaseDate(THIS.findReleaseDate(listing));
+          it.description = THIS.findDescription(listing);
+            THIS.publish(targetUrl, it);
+        } catch (Exception e) {
+          errorCount++;
+          println "Error ${e} durring processing";
+          if(errorCount==10){
+            throw e;
+          }
+        }
       }
       Thread.sleep(3000);
     }

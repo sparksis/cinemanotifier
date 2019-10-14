@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- JBoss, Home of Professional Open Source Copyright 2013, Red Hat, Inc. 
-	and/or its affiliates, and individual contributors by the @authors tag. See 
-	the copyright.txt in the distribution for a full listing of individual contributors. 
-	Licensed under the Apache License, Version 2.0 (the "License"); you may not 
-	use this file except in compliance with the License. You may obtain a copy 
-	of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
-	by applicable law or agreed to in writing, software distributed under the 
-	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
-	OF ANY KIND, either express or implied. See the License for the specific 
+<!-- JBoss, Home of Professional Open Source Copyright 2013, Red Hat, Inc.
+	and/or its affiliates, and individual contributors by the @authors tag. See
+	the copyright.txt in the distribution for a full listing of individual contributors.
+	Licensed under the Apache License, Version 2.0 (the "License"); you may not
+	use this file except in compliance with the License. You may obtain a copy
+	of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required
+	by applicable law or agreed to in writing, software distributed under the
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+	OF ANY KIND, either express or implied. See the License for the specific
 	language governing permissions and limitations under the License. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -23,24 +23,24 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<!-- Explicitly declaring the source encoding eliminates the following 
+		<!-- Explicitly declaring the source encoding eliminates the following
 			message: -->
-		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
+		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!-- You can reference property in pom.xml or filtered resources (must 
+		<!-- You can reference property in pom.xml or filtered resources (must
 			enable third-party plugin if using Maven < 2.1) -->
 
 		<!-- JBoss dependency versions -->
 
-		<version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+		<version.wildfly.maven.plugin>2.0.1.Final</version.wildfly.maven.plugin>
 
-		<!-- Define the version of the JBoss BOMs we want to import to specify 
+		<!-- Define the version of the JBoss BOMs we want to import to specify
 			tested stacks. -->
 		<version.jboss.bom>8.2.2.Final</version.jboss.bom>
 
-		<version.wildfly>10.0.1.0.Final</version.wildfly>
+		<version.wildfly>18.0.0.0.Final</version.wildfly>
 		<version.resteasy>3.0.19.Final</version.resteasy>
 
 		<!-- Other dependency versions -->
@@ -70,13 +70,13 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- JBoss distributes a complete set of Java EE 7 APIs including a Bill 
-				of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
-				of artifacts. We use this here so that we always get the correct versions 
-				of artifacts. Here we use the jboss-javaee-7.0-with-tools stack (you can 
-				read this as the JBoss stack of the Java EE 7 APIs, with some extras tools 
-				for your project, such as Arquillian for testing) and the jboss-javaee-7.0-with-hibernate 
-				stack you can read this as the JBoss stack of the Java EE 7 APIs, with extras 
+			<!-- JBoss distributes a complete set of Java EE 7 APIs including a Bill
+				of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection)
+				of artifacts. We use this here so that we always get the correct versions
+				of artifacts. Here we use the jboss-javaee-7.0-with-tools stack (you can
+				read this as the JBoss stack of the Java EE 7 APIs, with some extras tools
+				for your project, such as Arquillian for testing) and the jboss-javaee-7.0-with-hibernate
+				stack you can read this as the JBoss stack of the Java EE 7 APIs, with extras
 				from the Hibernate family of projects) -->
 			<dependency>
 				<groupId>org.wildfly.bom</groupId>
@@ -96,10 +96,10 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- First declare the APIs we depend on and need for compilation. All 
+		<!-- First declare the APIs we depend on and need for compilation. All
 			of them are provided by JBoss -->
 
-		<!-- Import the CDI API, we use provided scope as the API is included in 
+		<!-- Import the CDI API, we use provided scope as the API is included in
 			JBoss -->
 		<dependency>
 			<groupId>javax.enterprise</groupId>
@@ -107,7 +107,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the Common Annotations API (JSR-250), we use provided scope 
+		<!-- Import the Common Annotations API (JSR-250), we use provided scope
 			as the API is included in JBoss -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.annotation</groupId>
@@ -115,7 +115,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the JAX-RS API, we use provided scope as the API is included 
+		<!-- Import the JAX-RS API, we use provided scope as the API is included
 			in JBoss -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
@@ -135,7 +135,7 @@
 			<version>2.6.4</version>
 		</dependency>
 
-		<!-- Import the JPA API, we use provided scope as the API is included in 
+		<!-- Import the JPA API, we use provided scope as the API is included in
 			JBoss -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
@@ -143,7 +143,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the EJB API, we use provided scope as the API is included in 
+		<!-- Import the EJB API, we use provided scope as the API is included in
 			JBoss -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.ejb</groupId>
@@ -151,7 +151,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the Servlet API, we use provided scope as the API is included 
+		<!-- Import the Servlet API, we use provided scope as the API is included
 			in JBoss WildFly -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.servlet</groupId>
@@ -176,7 +176,7 @@
 
 		<!-- Now we declare any tools needed -->
 
-		<!-- Annotation processor to generate the JPA 2.0 metamodel classes for 
+		<!-- Annotation processor to generate the JPA 2.0 metamodel classes for
 			typesafe criteria queries -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -192,7 +192,7 @@
 		</dependency>
 
 		<!-- Optional, but highly recommended -->
-		<!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA) 
+		<!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA)
 			JPA from JUnit/TestNG -->
 		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>
@@ -271,7 +271,7 @@
 	</dependencies>
 
 	<build>
-		<!-- Maven will append the version to the finalName (which is the name 
+		<!-- Maven will append the version to the finalName (which is the name
 			given to the generated war, and hence the context root) -->
 		<finalName>${project.artifactId}</finalName>
 
@@ -324,7 +324,7 @@
 			</plugin>
 
 			<plugin>
-				<!-- This unclean export allows us to use the model and Rest interfaces 
+				<!-- This unclean export allows us to use the model and Rest interfaces
 					in groovy scripts. This is excellent because we're lazy -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-ejb-plugin</artifactId>
@@ -354,9 +354,9 @@
 
 	<profiles>
 		<profile>
-			<!-- The default profile skips all tests, though you can tune it to run 
+			<!-- The default profile skips all tests, though you can tune it to run
 				just unit tests based on a custom pattern -->
-			<!-- Seperate profiles are provided for running all tests, including Arquillian 
+			<!-- Seperate profiles are provided for running all tests, including Arquillian
 				tests that execute in the specified container -->
 			<id>default</id>
 			<activation>
@@ -375,11 +375,11 @@
 			</build>
 		</profile>
 		<profile>
-			<!-- When built in OpenShift the 'openshift' profile will be used when 
+			<!-- When built in OpenShift the 'openshift' profile will be used when
 				invoking mvn. -->
-			<!-- Use this profile for any OpenShift specific customization your app 
+			<!-- Use this profile for any OpenShift specific customization your app
 				will need. -->
-			<!-- By default that is to put the resulting archive into the 'deployments' 
+			<!-- By default that is to put the resulting archive into the 'deployments'
 				folder. -->
 			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 			<id>openshift</id>
@@ -398,9 +398,9 @@
 		</profile>
 		<profile>
 
-			<!-- An optional Arquillian testing profile that executes tests in your 
+			<!-- An optional Arquillian testing profile that executes tests in your
 				WildFly instance -->
-			<!-- This profile will start a new WildFly instance, and execute the test, 
+			<!-- This profile will start a new WildFly instance, and execute the test,
 				shutting it down when done -->
 			<!-- Run with: mvn clean test -Parq-wildfly-managed -->
 			<id>arq-wildfly-managed</id>
@@ -414,7 +414,7 @@
 		</profile>
 
 		<profile>
-			<!-- An optional Arquillian testing profile that executes tests in a remote 
+			<!-- An optional Arquillian testing profile that executes tests in a remote
 				WildFly instance -->
 			<!-- Run with: mvn clean test -Parq-wildfly-remote -->
 			<id>arq-wildfly-remote</id>

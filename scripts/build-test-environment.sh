@@ -4,8 +4,8 @@ WORKSPACE_DIR="${PWD}"
 
 WORKING_DIR="/tmp/cinemanotifier"
 DOWNLOAD_DIR="${WORKING_DIR}/downloads"
-INSTALLER="${DOWNLOAD_DIR}/wildfly-10.1.0.Final.tar.gz"
-TARGET_JBOSS_HOME="${WORKING_DIR}/wildfly-10.1.0.Final"
+INSTALLER="${DOWNLOAD_DIR}/wildfly-18.0.0.Final.tar.gz"
+TARGET_JBOSS_HOME="${WORKING_DIR}/wildfly-18.0.0.Final"
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SERVER_CONFIG_SRC="$(dirname ${SCRIPT_DIR})/.openshift/config/standalone-dev.xml"
@@ -20,7 +20,7 @@ function install {
   if [[ ! -f ${INSTALLER} ]]; then
     cd "${DOWNLOAD_DIR}"
     echo "Downloading Wildfly installer to ${INSTALLER}"
-    wget --quiet http://download.jboss.org/wildfly/10.1.0.Final/wildfly-10.1.0.Final.tar.gz
+    wget --quiet https://download.jboss.org/wildfly/18.0.0.Final/wildfly-18.0.0.Final.tar.gz
   fi
   cd "${WORKING_DIR}"
   tar xf "${INSTALLER}"
