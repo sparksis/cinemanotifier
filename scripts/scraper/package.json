@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.15",
+    "mongoose": "^5.7.5",
+    "sync-request": "^6.1.0",
     "xml2js": "^0.4.22"
   }
 }

@@ -1,27 +1,20 @@
 const _ = require('lodash');
 const fs = require('fs');
-const moment = require('moment');
 const mongoose = require('mongoose');
 const parseString = require('xml2js').parseString;
-
-
-mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
-const Page = mongoose.model('Page', { id: { type: String, unique: true }, url: String, firstSeen: Date, raw: mongoose.Schema.Types.Mixed });
+const request = require('sync-request');
+const Page = require('./Page')
 
 const xml = fs.readFileSync('./sitemap.xml')
+// const xml = request('GET', 'https://www.cineplex.com/sitemaphandlerforgooglecustomsearch.ashx/sitemap.xml').getBody();
 
 const USEFUL_URLS = /\/Movie\/([^/]+)$/;
 
-const insertPages = async function (pages) {
-    new Promise((resolve) => {
-        Page.insertMany(pages, { ordered: false }, (error, docs) => {
-            resolve();
-        });
-    });
-}
-
 parseString(xml, function (err, result) {
-    const commits = _.chain(result.urlset.url)
+    let updated = 0, inserted = 0;
+    let commits = [];
+
+    const queries = _.chain(result.urlset.url)
         .filter(e => e.loc)
         .forEach(e => _.forEach(e, (n, key) => e[key] = n[0]))
         .filter(page => page.loc.includes('/Movie/'))
@@ -32,15 +25,31 @@ parseString(xml, function (err, result) {
                 return true;
             }
         })
-        .map(page => new Page({ id: page.id, url: page.loc, firstSeen: moment().subtract(1, 'day').hour(21).toDate(), raw: page }))
-        .tap(console.log)
-        .chunk(20)
-        .map(insertPages)
-        .value()
+        .tap(pages => console.log(`Found ${pages.length} pages.`))
+        .map(page => Page.findOne({ id: page.id }, (err, doc) => {
+            if (err) {
+                console.log(err);
+            } else if (!doc) {
+                inserted++;
+                commits.push(new Page(page).save());
+            } else {
+                updated++;
+                doc.lastSeen = new Date();
+                commits.push(doc.save());
+            }
+        }))
+        .value();
 
-    console.log(`We have ${commits.length} promises`);
+    Promise.all(queries).then(() => {
+        Promise.all(commits)
+            .then(() => {
+                console.log(`We have ${queries.length} records.  Updated ${updated}; inserted ${inserted}.`);
+                () => mongoose.disconnect(() => console.log("Closed"));
+            }).catch((reason) => console.log(reason));
+    });
 
-    Promise.all(commits)
-        .then(() => mongoose.disconnect(() => console.log("Closed")))
-        .catch((reason) => console.log(reason));
 });
+
+setTimeout(() => {
+    process.exit(25);
+}, 10000);
